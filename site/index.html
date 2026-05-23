@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Compliance NLWeb — POC overview</title>
+<meta name="description" content="A conversational AI-compliance workbench: one retrieval+answer core exposed two ways — /ask for humans, /mcp for agents — over a curated, 100% open-access corpus of the world's AI rules and standards. Hybrid retrieval, reranking, grounded citations, and a dual local/cloud runtime." />
+<meta property="og:title" content="AI Compliance NLWeb — POC overview" />
+<meta property="og:description" content="An NLWeb-style layer over the world's AI rules: /ask for humans, /mcp for agents, hybrid retrieval + reranking, grounded citations, dual local/cloud runtime." />
+<meta property="og:type" content="website" />
+<!-- Absolute URLs assume the default project-Pages address; update all three
+     if you point a custom domain at the site. -->
+<meta property="og:url" content="https://starman69.github.io/ai-compliance-nlweb/" />
+<meta property="og:image" content="https://starman69.github.io/ai-compliance-nlweb/images/og-cover.png" />
+<meta property="og:image:width" content="2400" />
+<meta property="og:image:height" content="1260" />
+<meta property="og:image:alt" content="AI Compliance NLWeb — conversational AI-compliance workbench" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Compliance NLWeb — POC overview" />
+<meta name="twitter:description" content="An NLWeb-style layer over the world's AI rules: /ask for humans, /mcp for agents, hybrid retrieval + reranking, grounded citations, dual local/cloud runtime." />
+<meta name="twitter:image" content="https://starman69.github.io/ai-compliance-nlweb/images/og-cover.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=JetBrains+Mono:ital,wght@0,400..600;1,400..500&display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+<style>
+  /* ── Palette + type: OKLCH cool-paper + ink-navy, shared with the app ── */
+  :root {
+    --bg: oklch(98.5% 0.004 250);
+    --fg: oklch(22% 0.03 264);
+    --card: oklch(99.6% 0.003 250);
+    --card-2: oklch(96.5% 0.006 250);
+    --muted: oklch(48% 0.02 260);
+    --border: oklch(88% 0.008 250);
+    --border-strong: oklch(78% 0.012 255);
+    --accent: oklch(40% 0.10 264);
+    --accent-fg: oklch(99% 0.003 250);
+    --accent-soft: oklch(95% 0.02 264);
+    --ok-bg: oklch(94% 0.04 150);  --ok-fg: oklch(40% 0.10 150);
+    --warn-bg: oklch(94% 0.06 80); --warn-fg: oklch(50% 0.12 75);
+    --danger-bg: oklch(94% 0.035 22); --danger-fg: oklch(48% 0.16 22);
+    --font-sans: "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --maxw: 1080px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: color-mix(in oklch, var(--accent) 22%, transparent); }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 2px; }
+  code { font-family: var(--font-mono); font-size: 0.88em; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0;
+    font-variation-settings: 'opsz' 80, 'SOFT' 30;
+    text-wrap: balance;
+  }
+  h2 { font-size: clamp(1.9rem, 4vw, 2.9rem); }
+  h3 { font-size: 1.18rem; letter-spacing: -0.01em; line-height: 1.2; }
+  p { margin: 0 0 1rem; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1.1rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .eyebrow::before {
+    content: ""; width: 26px; height: 1px; background: var(--accent); opacity: 0.6;
+  }
+  .lede { font-size: clamp(1.12rem, 2vw, 1.32rem); line-height: 1.5; color: var(--fg); max-width: 60ch; text-wrap: pretty; }
+  .muted { color: var(--muted); }
+
+  /* ── Section rhythm: hairline rules, no shadows ── */
+  section { border-top: 1px solid var(--border); padding: clamp(3.5rem, 7vw, 6rem) 0; }
+
+  /* ── Masthead ── */
+  .hero { padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(3rem, 6vw, 5rem); border-top: 0; }
+  .hero .kicker {
+    font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 1.6rem;
+    display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .hero h1 {
+    font-size: clamp(2.8rem, 8vw, 5.6rem);
+    font-weight: 460;
+    font-variation-settings: 'opsz' 144, 'SOFT' 20;
+    line-height: 0.98;
+    margin-bottom: 0.4rem;
+  }
+  .hero .sub {
+    font-family: var(--font-display); font-style: italic; font-weight: 400;
+    font-size: clamp(1rem, 2.4vw, 1.5rem); color: var(--muted);
+    font-variation-settings: 'opsz' 30, 'SOFT' 100;
+    margin-bottom: 2rem;
+  }
+  .hero .lede { margin-bottom: 2.4rem; }
+
+  .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); }
+  .facts li { padding: 1.2rem 1.2rem 1.2rem 0; border-right: 1px solid var(--border); }
+  .facts li:last-child { border-right: 0; }
+  .facts .n { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 500; color: var(--accent); display: block; letter-spacing: -0.02em; }
+  .facts .k { font-size: 0.82rem; color: var(--muted); margin-top: 0.3rem; display: block; }
+  @media (max-width: 720px) { .facts { grid-template-columns: 1fr 1fr; } .facts li:nth-child(2){border-right:0;} }
+
+  /* ── Section intro head ── */
+  .head { max-width: none; margin-bottom: 2.6rem; }
+  .head h2 { margin-bottom: 1.1rem; }
+  .head .lede { max-width: none; }
+
+  /* ── Cards grid (tiers / contracts / domains) ── */
+  .tiers { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 0 0 2.6rem; }
+  .tiers.two { }
+  @media (min-width: 820px) { .tiers { grid-template-columns: repeat(3, 1fr); } .tiers.two { grid-template-columns: repeat(2, 1fr); } }
+  .tier { background: var(--card); padding: 1.5rem 1.4rem; }
+  .tier .step { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+  .tier h3 { margin: 0.5rem 0 0.6rem; }
+  .tier p { font-size: 0.95rem; margin: 0 0 0.6rem; color: var(--muted); }
+  .tier .cost { margin-top: 0.9rem; }
+  .tier ul { margin: 0.4rem 0 0; padding-left: 1.05rem; font-size: 0.9rem; color: var(--muted); }
+  .tier ul li { margin-bottom: 0.3rem; }
+  .tier code { color: var(--fg); }
+
+  /* ── Inline badges (mirror the app's chat badges) ── */
+  .badge {
+    display: inline-block; font-family: var(--font-mono); font-size: 0.72rem;
+    font-weight: 500; padding: 0.15em 0.5em; border-radius: 5px; line-height: 1.5;
+    background: var(--accent-soft); color: var(--accent); white-space: nowrap;
+  }
+  .badge.ok { background: var(--ok-bg); color: var(--ok-fg); }
+  .badge.warn { background: var(--warn-bg); color: var(--warn-fg); }
+
+  /* ── Screenshot figures ── */
+  .gallery { display: grid; gap: 1.6rem; }
+  .g-2 { grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .g-2 { grid-template-columns: 1fr 1fr; } }
+  .g-3 { grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .g-3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+  figure.shot { margin: 0; }
+  figure.shot .frame {
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    background: var(--card); cursor: zoom-in; position: relative; display: block;
+    transition: border-color 180ms ease;
+  }
+  figure.shot .frame:hover { border-color: var(--border-strong); }
+  figure.shot img { display: block; width: 100%; height: 320px; object-fit: cover; object-position: top center; background: var(--bg); }
+  figure.shot.tall img { height: 460px; }
+  figure.shot figcaption { margin-top: 0.85rem; font-size: 0.92rem; color: var(--muted); }
+  figure.shot figcaption b { color: var(--fg); font-weight: 600; }
+  /* Graceful placeholder until the light-mode screenshots are captured. */
+  figure.shot .frame.pending { display: flex; align-items: center; justify-content: center; min-height: 220px; cursor: default; background: repeating-linear-gradient(45deg, var(--card), var(--card) 12px, var(--card-2) 12px, var(--card-2) 24px); }
+  figure.shot.tall .frame.pending { min-height: 320px; }
+  figure.shot .frame.pending::after { content: "▦  screenshot — captured from the local runtime"; font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); padding: 0 1rem; text-align: center; }
+
+  /* ── Pipeline flow ── */
+  .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 2.4rem; }
+  .flow .node { flex: 1 1 140px; padding: 1.1rem 1rem; border-right: 1px solid var(--border); background: var(--card); }
+  .flow .node:last-child { border-right: 0; }
+  .flow .node .i { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); }
+  .flow .node .t { font-weight: 600; font-size: 0.95rem; margin-top: 0.25rem; }
+  .flow .node .d { font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* ── Response anatomy mock (metrics section) ── */
+  .answer-mock { border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 1.4rem 1.5rem; margin-bottom: 1.8rem; }
+  .answer-mock .q { font-weight: 600; margin-bottom: 0.8rem; }
+  .answer-mock .a { font-size: 0.96rem; margin-bottom: 0.6rem; }
+  .answer-mock .cite { color: var(--accent); font-family: var(--font-mono); font-size: 0.8em; }
+  .answer-mock .metabar { display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center; border-top: 1px solid var(--border); padding-top: 0.9rem; margin-top: 0.9rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+  .answer-mock .metabar .badge { font-size: 0.7rem; }
+
+  /* ── Tables (architecture) ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
+  .tbl th, .tbl td { text-align: left; padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .tbl thead th { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .tbl td:first-child { font-weight: 600; white-space: nowrap; }
+  .scroller { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+
+  /* ── Footer ── */
+  footer { border-top: 1px solid var(--border-strong); padding: 3rem 0 4rem; }
+  .principles { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; gap: 0; }
+  .principles li { padding: 0.95rem 0; border-top: 1px solid var(--border); display: flex; gap: 1rem; align-items: baseline; }
+  .principles li .num { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); min-width: 2.2rem; }
+  .principles li span:last-child { color: var(--fg); }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.6rem 0 2rem; }
+  .chips .chip { font-family: var(--font-mono); font-size: 0.74rem; padding: 0.3em 0.7em; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); }
+  footer .fine { font-size: 0.85rem; color: var(--muted); }
+  .colophon { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.6rem; margin: 0 0 1.4rem; }
+  .repo-cta { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 500; padding: 0.62em 1.05em; border: 1px solid var(--border-strong); border-radius: 8px; color: var(--fg); transition: border-color 160ms ease, color 160ms ease, background 160ms ease; }
+  .repo-cta:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); text-decoration: none; }
+  .repo-cta svg { width: 18px; height: 18px; flex: none; }
+  .byline { font-size: 0.92rem; color: var(--muted); }
+  .byline strong { color: var(--fg); font-weight: 600; }
+  .signoff { display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem 1.4rem; margin: 1.6rem 0; }
+  .social { display: inline-flex; flex-wrap: wrap; gap: 0.5rem; }
+  .social a { display: inline-flex; align-items: center; gap: 0.42rem; font-family: var(--font-mono); font-size: 0.76rem; color: var(--muted); padding: 0.34em 0.72em; border: 1px solid var(--border); border-radius: 999px; transition: border-color 150ms ease, color 150ms ease; }
+  .social a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+  .social svg { width: 14px; height: 14px; flex: none; }
+
+  /* ── Scroll reveal ── */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 620ms cubic-bezier(.2,.6,.2,1), transform 620ms cubic-bezier(.2,.6,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ── Lightbox ── */
+  .lightbox { position: fixed; inset: 0; background: oklch(22% 0.03 264 / 0.82); backdrop-filter: blur(4px); display: none; align-items: flex-start; justify-content: center; padding: 4vh 4vw; z-index: 100; overflow: auto; cursor: zoom-out; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 1100px; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--border-strong); background: var(--bg); }
+
+  .topnote { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<main class="wrap">
+
+  <!-- ───────────────────────── HERO ───────────────────────── -->
+  <header class="hero">
+    <p class="kicker reveal"><span class="dot"></span> Conversational AI-compliance workbench <span class="muted">·</span> proof of concept <span class="muted">·</span> <a href="https://github.com/starman69/ai-compliance-nlweb" target="_blank" rel="noopener">source on GitHub ↗</a></p>
+    <h1 class="reveal">AI Compliance NLWeb</h1>
+    <p class="sub reveal">ask the world's AI rules — and let agents ask too</p>
+    <p class="lede reveal">
+      An <a href="https://github.com/nlweb-ai/NLWeb" target="_blank" rel="noopener">NLWeb</a>-style
+      layer over a curated, <strong>100% open-access</strong> corpus of the world's AI rules and
+      standards — from the EU AI Act and GDPR to the NIST AI RMF, ISO/IEC 42001, and national
+      frameworks across five regulatory tiers. One retrieval&nbsp;+&nbsp;answer core, exposed two
+      ways: <code>/ask</code> for people (structured JSON) and <code>/mcp</code> for agents (MCP
+      tools). It is RAG-only and accuracy-first — hybrid retrieval and a reranker surface the
+      evidence, the model only explains what it can cite, and every claim carries a
+      <code>[framework §section, p.N]</code> citation. It runs fully on a local Docker stack or
+      on Azure.
+    </p>
+    <ul class="facts reveal">
+      <li><span class="n">48</span><span class="k">open-access documents · 32 frameworks across five tiers</span></li>
+      <li><span class="n">36/36</span><span class="k">golden-QA pass-rate on the local stack (qwen3:14b)</span></li>
+      <li><span class="n">100%</span><span class="k">of answers carry framework + section + page citations</span></li>
+      <li><span class="n">2</span><span class="k">runtimes — local docker-compose &amp; Azure, one codebase</span></li>
+    </ul>
+  </header>
+
+  <!-- ───────────────────── 01 · NLWEB ───────────────────── -->
+  <section id="nlweb">
+    <div class="head reveal">
+      <p class="eyebrow">01 — The NLWeb contract</p>
+      <h2>One core, two contracts</h2>
+      <p class="lede muted">
+        The whole system is a single retrieval+answer core, exposed through two thin
+        adapters that share the same request payload and never fork their logic. People get
+        structured JSON shaped like a Schema.org <code>ItemList</code>; agents get the same
+        core as Model Context Protocol tools. A <code>mode</code> flag decides how much work
+        to do — and whether the language model runs at all.
+      </p>
+    </div>
+
+    <div class="tiers two reveal">
+      <div class="tier">
+        <p class="step">For people · POST /ask</p>
+        <h3><code>/ask</code></h3>
+        <p>A grounded, cited answer as JSON — <code>answer</code>, ranked <code>sources[]</code>, an additive Schema.org <code>item_list</code>, plus confidence, intent, scope and a token ledger.</p>
+        <p class="cost"><span class="badge">also POST /ask/stream — SSE token streaming</span></p>
+      </div>
+      <div class="tier">
+        <p class="step">For agents · GET/POST /mcp</p>
+        <h3><code>/mcp</code></h3>
+        <p>The same core as an MCP server over JSON-RPC (protocol <code>2025-11-25</code>). Tools an agent can call directly:</p>
+        <ul>
+          <li><code>ask_compliance</code> — grounded, cited Q&amp;A</li>
+          <li><code>list_frameworks</code> · <code>get_framework</code></li>
+          <li>prompt: <code>compare_jurisdictions</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="topnote reveal"><code>mode</code> gates the spend: <span class="badge ok">list</span> retrieval only — no model call · <span class="badge">summarize</span> one citation-enforced synthesis pass · <span class="badge warn">generate</span> a longer drafted artifact.</p>
+  </section>
+
+  <!-- ───────────────────── 02 · MCP ───────────────────── -->
+  <section id="mcp">
+    <div class="head reveal">
+      <p class="eyebrow">02 — Agents</p>
+      <h2>An ask-endpoint agents can call</h2>
+      <p class="lede muted">
+        NLWeb's premise is that every site will soon expose an <code>/ask</code> endpoint —
+        and that agents will want to call it. Here the MCP server is mounted on the same
+        FastAPI app and runs the identical pipeline a human query does, so an agent's
+        <code>ask_compliance</code> call returns the same grounded, cited answer the UI
+        shows — including the Schema.org <code>item_list</code> projection.
+      </p>
+    </div>
+    <div class="scroller reveal">
+      <table class="tbl">
+        <thead><tr><th>MCP method</th><th>Returns</th></tr></thead>
+        <tbody>
+          <tr><td>initialize</td><td>Server info + capabilities; echoes the client's protocol version</td></tr>
+          <tr><td>tools/list</td><td>The three tools <em>with descriptions</em> + input schemas</td></tr>
+          <tr><td>tools/call · ask_compliance</td><td>The full grounded answer (sources + <code>item_list</code> + token usage)</td></tr>
+          <tr><td>prompts/list · prompts/get</td><td><code>compare_jurisdictions</code> — a templated comparison prompt</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="topnote reveal" style="margin-top:1.4rem">Both endpoints enforce the same security: token scopes (<code>ask:read</code>, <code>mcp:invoke</code>), per-token/IP rate limiting, a locked CORS allow-list, and an audit log of every call.</p>
+  </section>
+
+  <!-- ───────────────────── 03 · RETRIEVAL ───────────────────── -->
+  <section id="retrieval">
+    <div class="head reveal">
+      <p class="eyebrow">03 — Retrieval &amp; ranking</p>
+      <h2>Hybrid retrieval, then a reranker decides</h2>
+      <p class="lede muted">
+        Dense vectors catch meaning; sparse keywords catch the exact statute number. The
+        pipeline runs both, fuses them, then lets a cross-encoder reranker make the final
+        call — so the eight chunks an answer cites are the most relevant of the candidate
+        pool, not just the first eight a single index returned.
+      </p>
+    </div>
+
+    <div class="flow reveal">
+      <div class="node"><div class="i">query</div><div class="t">Decontextualize</div><div class="d">Condense multi-turn → standalone query; detect scope</div></div>
+      <div class="node"><div class="i">dense + sparse</div><div class="t">Hybrid search</div><div class="d">Embeddings (1024-d) + BM25 keywords, jurisdiction-filtered</div></div>
+      <div class="node"><div class="i">rrf</div><div class="t">Fuse → 32</div><div class="d">Reciprocal-rank fusion of both result sets</div></div>
+      <div class="node"><div class="i">cross-encoder</div><div class="t">Rerank</div><div class="d">bge-reranker-base scores all 32 for relevance</div></div>
+      <div class="node"><div class="i">top-8</div><div class="t">Cited sources</div><div class="d">The evidence the model is allowed to use</div></div>
+    </div>
+
+    <p class="topnote reveal">When a question names a specific framework, retrieval steers to that document — “GDPR requirements for AI?” searches the <em>GDPR</em>, not whichever EU text happens to say “AI” most often. Reranking is on by default; an env toggle turns it off for A/B comparison.</p>
+  </section>
+
+  <!-- ───────────────────── 04 · THE APPLICATION ───────────────────── -->
+  <section id="application">
+    <div class="head reveal">
+      <p class="eyebrow">04 — The application</p>
+      <h2>What a user actually sees</h2>
+      <p class="lede muted">
+        A focused chat surface over the corpus: a framework explorer that scopes retrieval,
+        answers that stream in token-by-token with a live citation cursor, a sources panel,
+        and a metrics bar under every reply. Click any frame to view it full size.
+      </p>
+    </div>
+
+    <div class="gallery g-2 reveal">
+      <figure class="shot">
+        <a class="frame" href="images/01-empty.png" data-lightbox><img loading="lazy" src="images/01-empty.png" alt="The empty-state landing view" /></a>
+        <figcaption><b>The landing view.</b> Quick-start questions, the mode selector, and the framework explorer — the whole surface fits one focused column.</figcaption>
+      </figure>
+      <figure class="shot">
+        <a class="frame" href="images/04-corpus-explorer.png" data-lightbox><img loading="lazy" src="images/04-corpus-explorer.png" alt="The corpus framework explorer" /></a>
+        <figcaption><b>Corpus explorer.</b> All 48 documents grouped by tier; selecting jurisdictions narrows the retrieval scope for the next question.</figcaption>
+      </figure>
+      <figure class="shot tall">
+        <a class="frame" href="images/02-answer-sources.png" data-lightbox><img loading="lazy" src="images/02-answer-sources.png" alt="A grounded answer with inline citations and a sources panel" /></a>
+        <figcaption><b>Grounded, cited answer.</b> Streamed token-by-token, with inline <code>[framework §section, p.N]</code> markers and a sources panel listing the ranked, reranked chunks.</figcaption>
+      </figure>
+      <figure class="shot tall">
+        <a class="frame" href="images/03-comparison.png" data-lightbox><img loading="lazy" src="images/03-comparison.png" alt="A cross-jurisdiction comparison answer" /></a>
+        <figcaption><b>Compare jurisdictions.</b> A comparison-intent query scopes to multiple jurisdictions and contrasts how each regulates a topic — each point still cited.</figcaption>
+      </figure>
+      <figure class="shot">
+        <a class="frame" href="images/05-multiturn.png" data-lightbox><img loading="lazy" src="images/05-multiturn.png" alt="A multi-turn follow-up, interpreted" /></a>
+        <figcaption><b>Multi-turn.</b> A short follow-up is condensed into a standalone query (shown as “↳ interpreted as…”) so retrieval keeps the topic.</figcaption>
+      </figure>
+      <figure class="shot">
+        <a class="frame" href="images/06-swagger.png" data-lightbox><img loading="lazy" src="images/06-swagger.png" alt="OpenAPI / Swagger docs" /></a>
+        <figcaption><b>Typed API surface.</b> <code>/ask</code>, <code>/ask/stream</code>, <code>/mcp</code>, <code>/corpus</code> and <code>/health</code> — documented as OpenAPI at <code>/docs</code>.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ───────────────────── 05 · ARCHITECTURE ───────────────────── -->
+  <section id="architecture">
+    <div class="head reveal">
+      <p class="eyebrow">05 — Architecture</p>
+      <h2>One codebase, two runtimes</h2>
+      <p class="lede muted">
+        Profile branching lives entirely in client factories, so the pipeline, router and
+        API never ask which environment they're in. The local profile is a full
+        docker-compose stack with zero cloud dependencies; the cloud profile is Azure-native
+        and managed-identity throughout, provisioned by Bicep. A store's embedding dimension
+        is immutable, so each profile is ingested independently into its own matched stack.
+      </p>
+    </div>
+    <div class="scroller reveal">
+      <table class="tbl">
+        <thead><tr><th>Capability</th><th>azure (production)</th><th>local (docker-compose)</th></tr></thead>
+        <tbody>
+          <tr><td>Layout / PDF</td><td>Azure Document Intelligence (prebuilt-layout)</td><td>unstructured.io</td></tr>
+          <tr><td>Answers</td><td>Azure OpenAI · gpt-4.1</td><td>Ollama · qwen3:14b</td></tr>
+          <tr><td>Dense embeddings</td><td>text-embedding-3-small (1536-d)</td><td>mxbai-embed-large (1024-d)</td></tr>
+          <tr><td>Sparse / keyword</td><td>BM25 keyword index</td><td>BM25 (fastembed)</td></tr>
+          <tr><td>Hybrid fusion</td><td>Hybrid RRF (AI Search)</td><td>Reciprocal-rank fusion (RRF)</td></tr>
+          <tr><td>Reranker</td><td>AI Search semantic ranker</td><td>bge-reranker-base · cross-encoder (TEI)</td></tr>
+          <tr><td>Vector store</td><td>Azure AI Search — 2 indexes</td><td>Qdrant — 2 collections</td></tr>
+          <tr><td>API</td><td>Azure Container Apps</td><td>FastAPI</td></tr>
+          <tr><td>Web</td><td>Azure Static Web App</td><td>Vite dev / nginx</td></tr>
+          <tr><td>Auth</td><td>Managed identity (DefaultAzureCredential)</td><td>dev bearer token</td></tr>
+          <tr><td>Infra-as-code</td><td>Bicep</td><td>docker-compose</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="topnote reveal" style="margin-top:1.4rem">Runs on GPU locally — the compose <code>ollama</code> service reserves an NVIDIA device. A deterministic mock backend powers tests and offline UI work with no model server at all.</p>
+  </section>
+
+  <!-- ───────────────────── 06 · METRICS ───────────────────── -->
+  <section id="metrics">
+    <div class="head reveal">
+      <p class="eyebrow">06 — Evidence</p>
+      <h2>Every answer shows its work</h2>
+      <p class="lede muted">
+        Trust in a regulatory tool comes from transparency, not confidence theatre. Under
+        every reply is a metrics bar that exposes the whole decision: how sure the system
+        is, which model ran, how many tokens it cost, how long it took, and how retrieval
+        narrowed the corpus to the cited eight.
+      </p>
+    </div>
+
+    <div class="answer-mock reveal">
+      <p class="q">What are high-risk AI systems under the EU AI Act?</p>
+      <p class="a">High-risk AI systems are those listed in Annex III or used as a safety component of regulated products… subject to risk management, data governance, transparency, human oversight, and conformity assessment <span class="cite">[EU AI Act §Art. 6, p.4]</span>.</p>
+      <div class="metabar">
+        <span class="badge ok">⭐ high confidence</span>
+        <span>qwen3:14b</span><span>·</span>
+        <span>▲ 2.1k</span><span>▼ 820</span><span>⋯ 9 tok</span><span>·</span>
+        <span>1.2 s</span><span>·</span>
+        <span>32 → 8 (rrf+rerank)</span>
+      </div>
+    </div>
+
+    <ul class="facts reveal" style="border-top:1px solid var(--border)">
+      <li><span class="n">36/36</span><span class="k">golden-QA pass-rate + retrieval hit-rate (local · qwen3:14b)</span></li>
+      <li><span class="n">100%</span><span class="k">intent-classification accuracy across every path</span></li>
+      <li><span class="n">97%</span><span class="k">mean term coverage across the answer set</span></li>
+      <li><span class="n">SSE</span><span class="k">token streaming with accurate end-of-stream usage</span></li>
+    </ul>
+    <p class="muted reveal" style="margin-top:2rem">
+      A token ledger prices every call; an audit log records the principal, intent, sources,
+      usage and latency of each query. Neither can break the answer path — they swallow their
+      own errors and only log. When the evidence is insufficient, the system says so rather
+      than guessing.
+    </p>
+  </section>
+
+  <!-- ───────────────────── FOOTER ───────────────────── -->
+  <footer>
+    <p class="eyebrow reveal">Principles</p>
+    <ul class="principles reveal">
+      <li><span class="num">01</span><span>Citations are load-bearing — every claim cites <code>[framework §section, p.N]</code>; insufficient evidence is stated, never papered over.</span></li>
+      <li><span class="num">02</span><span><code>mode</code> gates the model — <code>list</code> is retrieval only, with no LLM call at all.</span></li>
+      <li><span class="num">03</span><span>One core, two contracts — <code>/ask</code> and <code>/mcp</code> are thin adapters that never fork their logic.</span></li>
+      <li><span class="num">04</span><span>Profile branching lives in client factories — the pipeline never asks which runtime it's on.</span></li>
+      <li><span class="num">05</span><span>A 100% open-access corpus — no paywalled content; ISO/IEC standards appear as open, non-normative authored summaries.</span></li>
+    </ul>
+
+    <div class="chips reveal">
+      <span class="chip">Python 3.11</span>
+      <span class="chip">FastAPI</span>
+      <span class="chip">React + Vite</span>
+      <span class="chip">TypeScript</span>
+      <span class="chip">Tailwind v4</span>
+      <span class="chip">Qdrant</span>
+      <span class="chip">Ollama</span>
+      <span class="chip">Azure OpenAI</span>
+      <span class="chip">Azure AI Search</span>
+      <span class="chip">MCP</span>
+      <span class="chip">Bicep</span>
+      <span class="chip">docker-compose</span>
+    </div>
+
+    <div class="colophon reveal">
+      <a class="repo-cta" href="https://github.com/starman69/ai-compliance-nlweb" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+        View the source on GitHub ↗
+      </a>
+      <a class="repo-cta" href="https://medium.com/@dave-patten/nlweb-mcp-why-every-website-will-soon-need-an-ask-endpoint-92c8bac9d4da" target="_blank" rel="noopener">
+        What is NLWeb? — the write-up ↗
+      </a>
+    </div>
+
+    <div class="signoff reveal">
+      <span class="byline">Built by <strong>Dave Patten</strong></span>
+      <span class="social">
+        <a href="https://github.com/starman69" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.51 11.51 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.604-.015 2.896-.015 3.286 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>GitHub</a>
+        <a href="https://medium.com/@dave-patten" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75S24 8.83 24 12"></path></svg>Medium</a>
+        <a href="https://www.linkedin.com/in/dpatten" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>LinkedIn</a>
+      </span>
+    </div>
+
+    <p class="fine reveal">
+      A proof of concept — run it yourself on the local docker-compose stack, or deploy the
+      Azure profile into your own subscription with Bicep. Screenshots captured from the
+      local runtime. Not legal advice.
+    </p>
+  </footer>
+
+</main>
+
+<div class="lightbox" id="lightbox" aria-hidden="true"><img alt="" /></div>
+
+<script>
+  // Scroll-reveal: stagger elements into view.
+  (function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach(function (e) { e.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+
+  // Graceful placeholder for screenshots not captured yet.
+  (function () {
+    document.querySelectorAll('figure.shot img').forEach(function (img) {
+      img.addEventListener('error', function () {
+        var frame = img.closest('.frame');
+        if (frame) { frame.classList.add('pending'); frame.removeAttribute('data-lightbox'); }
+        img.remove();
+      });
+    });
+  })();
+
+  // Lightbox for screenshots.
+  (function () {
+    var lb = document.getElementById('lightbox');
+    var img = lb.querySelector('img');
+    document.querySelectorAll('a.frame[data-lightbox]').forEach(function (a) {
+      a.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        if (a.classList.contains('pending')) return;
+        img.src = a.getAttribute('href');
+        lb.classList.add('open');
+        lb.setAttribute('aria-hidden', 'false');
+      });
+    });
+    function close() { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); img.src = ''; }
+    lb.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+FROM python:3.11-slim
+WORKDIR /app
+RUN pip install --no-cache-dir qdrant-client httpx
+COPY infra/compose/bootstrap.py .
+CMD ["python", "bootstrap.py"]

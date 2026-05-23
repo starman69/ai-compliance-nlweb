@@ -1,0 +1,10 @@
+# API image. src/ is volume-mounted in compose, so the image only needs deps.
+FROM python:3.11-slim
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt openai qdrant-client
+
+ENV PYTHONPATH=/app/src
+EXPOSE 8000
+CMD ["uvicorn", "api.app:app", "--host", "0.0.0.0", "--port", "8000"]

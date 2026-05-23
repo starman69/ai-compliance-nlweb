@@ -1,0 +1,289 @@
+# Curated offline corpus chunks for the Mock vector store (NLWEB_BACKEND=mock).
+# Concise, factual paraphrases of public materials — enough to ground and cite
+# demo answers without fetching/ingesting the full corpus. ISO chunks are
+# loaded separately from manifest/summaries/*.md. doc_id values match the manifest.
+chunks:
+  - chunk_id: eu-ai-act::art-9
+    doc_id: eu-ai-act-2024-1689
+    short_name: EU AI Act
+    title: "Regulation (EU) 2024/1689 (Artificial Intelligence Act)"
+    jurisdiction: eu
+    framework_family: EU AI Act
+    section_path: "Art. 9 — Risk management system"
+    page: 52
+    status: in_force
+    url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689"
+    text: >
+      Providers of high-risk AI systems must establish, implement, document and
+      maintain a risk management system that runs across the entire lifecycle. It
+      requires identifying and analysing known and foreseeable risks to health,
+      safety and fundamental rights, estimating risks from intended use and
+      reasonably foreseeable misuse, and adopting targeted risk-management measures.
+
+  - chunk_id: eu-ai-act::art-12-records
+    doc_id: eu-ai-act-2024-1689
+    short_name: EU AI Act
+    title: "Regulation (EU) 2024/1689 (Artificial Intelligence Act)"
+    jurisdiction: eu
+    framework_family: EU AI Act
+    section_path: "Art. 12 — Record-keeping"
+    page: 54
+    status: in_force
+    url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689"
+    text: >
+      High-risk AI systems must technically allow for the automatic recording of
+      events (logs) over the system's lifetime. Logging must enable traceability
+      appropriate to the intended purpose, support post-market monitoring, and help
+      identify situations that may make the system present a risk or undergo
+      substantial modification. Providers keep documentation for at least ten years.
+
+  - chunk_id: eu-ai-act-annexes::annex-iii
+    doc_id: eu-ai-act-annexes
+    short_name: EU AI Act Annexes
+    title: "EU AI Act — Annexes I–XIII"
+    jurisdiction: eu
+    framework_family: EU AI Act
+    section_path: "Annex III — High-risk use cases"
+    page: 1
+    status: in_force
+    url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689"
+    text: >
+      Annex III lists the use cases that make an AI system high-risk, including
+      biometric identification, critical infrastructure, education and vocational
+      training, employment and worker management, access to essential private and
+      public services, law enforcement, migration and border control, and the
+      administration of justice and democratic processes.
+
+  - chunk_id: gpai::transparency
+    doc_id: eu-gpai-code-of-practice-2025
+    short_name: GPAI Code of Practice
+    title: "General-Purpose AI Code of Practice"
+    jurisdiction: eu
+    framework_family: EU AI Act
+    section_path: "Transparency & Copyright"
+    page: 3
+    status: voluntary
+    url: "https://digital-strategy.ec.europa.eu/en/policies/ai-code-practice"
+    text: >
+      The voluntary GPAI Code of Practice helps providers of general-purpose AI
+      models demonstrate compliance with the AI Act's transparency, copyright, and
+      safety-and-security obligations, including maintaining model documentation and
+      a policy to respect EU copyright law.
+
+  - chunk_id: gdpr::art-22
+    doc_id: gdpr-2016-679
+    short_name: GDPR
+    title: "Regulation (EU) 2016/679 (GDPR)"
+    jurisdiction: eu
+    framework_family: GDPR
+    section_path: "Art. 22 — Automated individual decision-making"
+    page: 46
+    status: in_force
+    url: "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    text: >
+      Article 22 of the GDPR governs automated individual decision-making. Under
+      Article 22, data subjects have the right not to be subject to a decision based
+      solely on automated processing, including profiling, that produces legal or
+      similarly significant effects. Where such processing is permitted, controllers
+      must implement suitable safeguards, including the right to obtain human
+      intervention, to express a point of view, and to contest the decision.
+
+  - chunk_id: gdpr::dpia
+    doc_id: gdpr-2016-679
+    short_name: GDPR
+    title: "Regulation (EU) 2016/679 (GDPR)"
+    jurisdiction: eu
+    framework_family: GDPR
+    section_path: "Art. 35 — Data protection impact assessment"
+    page: 53
+    status: in_force
+    url: "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    text: >
+      Where a type of processing — in particular using new technologies — is likely
+      to result in a high risk to the rights and freedoms of natural persons, the
+      controller must carry out a data protection impact assessment (DPIA) before
+      processing, assessing necessity, proportionality, and the measures to mitigate
+      risk.
+
+  - chunk_id: nist-rmf::functions
+    doc_id: nist-ai-rmf-100-1
+    short_name: NIST AI RMF
+    title: "NIST AI Risk Management Framework 1.0 (AI 100-1)"
+    jurisdiction: us
+    framework_family: NIST AI RMF
+    section_path: "Core — Govern/Map/Measure/Manage"
+    page: 20
+    status: voluntary
+    url: "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+    text: >
+      The AI RMF Core organizes activities into four functions. Govern cultivates a
+      culture of risk management; Map establishes the context and identifies risks;
+      Measure analyzes, assesses, and tracks AI risks; and Manage prioritizes and
+      acts on risks. The framework is voluntary, rights-preserving, and
+      sector-agnostic.
+
+  - chunk_id: nist-genai::actions
+    doc_id: nist-ai-600-1-genai-profile
+    short_name: NIST GenAI Profile
+    title: "NIST AI RMF Generative AI Profile (NIST-AI-600-1)"
+    jurisdiction: us
+    framework_family: NIST AI RMF
+    section_path: "Suggested actions"
+    page: 10
+    status: voluntary
+    url: "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+    text: >
+      The Generative AI Profile identifies risks unique to or exacerbated by
+      generative AI — such as confabulation, dangerous or violent content, data
+      privacy, and information integrity — and maps suggested actions onto the AI RMF
+      functions to help organizations govern and manage them.
+
+  - chunk_id: colorado::high-risk
+    doc_id: colorado-ai-act-sb24-205
+    short_name: Colorado AI Act
+    title: "Colorado Artificial Intelligence Act (SB 24-205)"
+    jurisdiction: us-co
+    framework_family: Colorado AI Act
+    section_path: "Duty of care — high-risk systems"
+    page: 4
+    status: in_force
+    url: "https://leg.colorado.gov/bills/sb24-205"
+    text: >
+      Developers and deployers of high-risk AI systems must use reasonable care to
+      protect consumers from known or reasonably foreseeable risks of algorithmic
+      discrimination. Deployers must complete impact assessments, maintain a risk
+      management policy and program, and notify consumers when a high-risk system is
+      used to make a consequential decision.
+
+  - chunk_id: texas-traiga::prohibited
+    doc_id: texas-traiga-hb149
+    short_name: Texas TRAIGA
+    title: "Texas Responsible Artificial Intelligence Governance Act (HB 149)"
+    jurisdiction: us-tx
+    framework_family: Texas TRAIGA
+    section_path: "Prohibited uses"
+    page: 6
+    status: in_force
+    url: "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB149"
+    text: >
+      TRAIGA prohibits developing or deploying AI systems intended to manipulate
+      human behavior to incite harm, to unlawfully discriminate against a protected
+      class, or for certain social-scoring and biometric uses. It focuses on intent
+      and includes obligations specific to government agency use of AI.
+
+  - chunk_id: california-sb53::frontier
+    doc_id: california-sb-53
+    short_name: California SB 53
+    title: "California SB 53 — Transparency in Frontier AI Act"
+    jurisdiction: us-ca
+    framework_family: California AI laws
+    section_path: "Frontier model transparency"
+    page: 3
+    status: in_force
+    url: "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB53"
+    text: >
+      Large frontier-model developers must publish a framework describing how they
+      incorporate safety standards, assess and mitigate catastrophic risk, and report
+      critical safety incidents. The law emphasizes transparency and accountability
+      for the most capable models.
+
+  - chunk_id: nyc-ll144::bias-audit
+    doc_id: nyc-ll144-aedt
+    short_name: NYC LL144
+    title: "NYC Local Law 144 (Automated Employment Decision Tools)"
+    jurisdiction: us-ny
+    framework_family: NYC LL144
+    section_path: "Bias audit & notice"
+    page: 1
+    status: in_force
+    url: "https://www.nyc.gov/site/dca/about/automated-employment-decision-tools.page"
+    text: >
+      Employers using an automated employment decision tool must have it
+      independently bias-audited within the prior year, publish a summary of the
+      audit results, and notify candidates and employees that the tool is used,
+      including the job qualifications and characteristics it assesses.
+
+  - chunk_id: oecd::principles
+    doc_id: oecd-ai-principles
+    short_name: OECD AI Principles
+    title: "OECD Recommendation on Artificial Intelligence (OECD/LEGAL/0449)"
+    jurisdiction: int
+    framework_family: OECD AI Principles
+    section_path: "Values-based principles"
+    page: 7
+    status: voluntary
+    url: "https://legalinstruments.oecd.org/en/instruments/OECD-LEGAL-0449"
+    text: >
+      The OECD AI Principles promote AI that is innovative, trustworthy, and
+      respects human rights and democratic values: inclusive growth and well-being,
+      human-centred values and fairness, transparency and explainability, robustness
+      and safety, and accountability. They also underpin the widely adopted
+      definition of an AI system.
+
+  - chunk_id: uk-ico::fairness
+    doc_id: uk-ico-ai-guidance
+    short_name: UK ICO AI Guidance
+    title: "ICO — Guidance on AI and data protection"
+    jurisdiction: uk
+    framework_family: UK AI regulation
+    section_path: "Fairness, transparency & explainability"
+    page: 12
+    status: voluntary
+    url: "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/"
+    text: >
+      The ICO expects organisations using AI on personal data to ensure lawfulness,
+      fairness and transparency, to complete data protection impact assessments for
+      high-risk processing, to mitigate bias and discrimination, and to be able to
+      explain automated decisions to affected individuals.
+
+  - chunk_id: eu-ai-act::policy-overview
+    doc_id: eu-ai-act-2024-1689
+    short_name: EU AI Act
+    title: "Regulation (EU) 2024/1689 (Artificial Intelligence Act)"
+    jurisdiction: eu
+    framework_family: EU AI Act
+    section_path: "Overview — risk-based AI policy"
+    page: 1
+    status: in_force
+    url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689"
+    text: >
+      The EU AI Act is the world's first comprehensive, horizontal AI law. It takes
+      a risk-based approach: it prohibits a small set of unacceptable-risk practices,
+      imposes strict obligations on high-risk systems (risk management, data
+      governance, transparency, human oversight, logging, conformity assessment),
+      sets transparency duties for limited-risk systems, and adds rules for
+      general-purpose AI. EU AI policy is thus binding, centralized, and prescriptive.
+
+  - chunk_id: us-policy::overview
+    doc_id: america-ai-action-plan-2025
+    short_name: AI Action Plan
+    title: "America's AI Action Plan"
+    jurisdiction: us
+    framework_family: US Executive AI policy
+    section_path: "US approach to AI policy"
+    page: 1
+    status: in_force
+    url: "https://www.whitehouse.gov/wp-content/uploads/2025/07/Americas-AI-Action-Plan.pdf"
+    text: >
+      US AI policy is innovation-led, sectoral, and largely non-binding at the
+      federal level: voluntary frameworks such as the NIST AI RMF, executive orders
+      setting national strategy, and OMB memos governing federal agencies' own use of
+      AI, rather than a single horizontal statute. Binding obligations come mainly
+      from state laws (e.g. Colorado, Texas, California). The federal approach favors
+      promoting innovation and removing barriers over prescriptive regulation.
+
+  - chunk_id: canada-aida::overview
+    doc_id: canada-aida
+    short_name: Canada AIDA
+    title: "Artificial Intelligence and Data Act (AIDA) — Bill C-27, Part 3"
+    jurisdiction: ca
+    framework_family: Canada AIDA
+    section_path: "High-impact systems"
+    page: 2
+    status: historical
+    url: "https://ised-isde.canada.ca/site/innovation-better-canada/en/artificial-intelligence-and-data-act"
+    text: >
+      AIDA, proposed within Bill C-27, would have required persons responsible for
+      high-impact AI systems to assess and mitigate risks of harm and biased output,
+      and to keep records. Note Bill C-27 died on the Order Paper when Parliament was
+      prorogued in January 2025, so AIDA is not in force.

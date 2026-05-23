@@ -1,0 +1,39 @@
+{
+  "name": "compliance-chunks-index",
+  "fields": [
+    { "name": "chunk_id", "type": "Edm.String", "key": true, "filterable": true },
+    { "name": "doc_id", "type": "Edm.String", "filterable": true, "facetable": true },
+    { "name": "short_name", "type": "Edm.String", "searchable": true, "filterable": true },
+    { "name": "title", "type": "Edm.String", "searchable": true },
+    { "name": "jurisdiction", "type": "Edm.String", "filterable": true, "facetable": true },
+    { "name": "framework_family", "type": "Edm.String", "filterable": true, "facetable": true },
+    { "name": "section_path", "type": "Edm.String", "searchable": true },
+    { "name": "page", "type": "Edm.Int32", "filterable": true },
+    { "name": "url", "type": "Edm.String" },
+    { "name": "status", "type": "Edm.String", "filterable": true },
+    { "name": "text", "type": "Edm.String", "searchable": true },
+    {
+      "name": "embedding",
+      "type": "Collection(Edm.Single)",
+      "searchable": true,
+      "dimensions": 1536,
+      "vectorSearchProfile": "default-profile"
+    }
+  ],
+  "vectorSearch": {
+    "algorithms": [{ "name": "hnsw-algo", "kind": "hnsw" }],
+    "profiles": [{ "name": "default-profile", "algorithm": "hnsw-algo" }]
+  },
+  "semantic": {
+    "configurations": [
+      {
+        "name": "default",
+        "prioritizedFields": {
+          "titleField": { "fieldName": "short_name" },
+          "prioritizedContentFields": [{ "fieldName": "text" }],
+          "prioritizedKeywordsFields": [{ "fieldName": "section_path" }]
+        }
+      }
+    ]
+  }
+}

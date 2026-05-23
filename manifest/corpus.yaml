@@ -1,0 +1,871 @@
+# =============================================================================
+# AI Compliance NLWeb — corpus manifest
+# =============================================================================
+# Single source of truth for the corpus (PLAN.md §2). Versioned; the fetch
+# script (scripts/fetch_corpus.py) and ingestion (scripts/ingest.py) read this.
+#
+# The corpus is 100% OPEN-ACCESS. No paywalled content ships in this public repo.
+# Copyrighted ISO/IEC standards are represented by `source_type: authored_summary`
+# entries — open, non-normative summaries (scope, Harmonized-Structure clauses
+# 4–10, Annex A themes, cross-refs) compiled from public facts, committed under
+# manifest/summaries/. They are NOT the normative standard text.
+#
+# Per-doc fields:
+#   id              stable kebab-case key (also the source filename stem)
+#   title           full official title
+#   short_name      compact label used in citations: "[short_name §section, p.N]"
+#   tier            tier1..tier5 (see `tiers` below)
+#   jurisdiction    scope token, AND-ed into the Qdrant filter via NLWeb `site`
+#   framework_family clusters related docs in the corpus explorer (tier→family→doc)
+#   authority       issuing body
+#   official_url    canonical source; fetch script re-verifies at pull time
+#   format          pdf | html | md
+#   access          open  (always — no paywalled docs in this repo)
+#   source_type     fetch | authored_summary
+#   status          in_force | proposed | voluntary | historical
+#   version_date    adoption/publication date (YYYY or YYYY-MM); manifest is truth
+#   path            (authored_summary only) summary file under manifest/
+#   license_note    reuse/licensing note
+#   notes           provenance, currency, verification flags
+#
+# Currency verified May 2026. URLs flagged "verify" are best-known canonical
+# locations that may have moved (esp. whitehouse.gov pages after the 2025 admin
+# change); the fetch script re-checks each at pull time.
+# =============================================================================
+
+version: 1
+updated: 2026-05-23
+total_documents: 48
+# Embeddings are per-profile — a store's dim is immutable (PLAN.md §4):
+embedding_local: mxbai-embed-large        # 1024-d → Qdrant
+embedding_azure: text-embedding-3-small   # 1536-d → Azure AI Search
+
+# Scope tokens used by `jurisdiction` and the NLWeb `site` param.
+jurisdictions:
+  int:    International / global
+  eu:     European Union
+  uk:     United Kingdom
+  ca:     Canada
+  sg:     Singapore
+  br:     Brazil
+  cn:     China
+  us:     United States (federal)
+  us-co:  US — Colorado
+  us-tx:  US — Texas
+  us-ut:  US — Utah
+  us-ca:  US — California
+  us-ny:  US — New York (NYC)
+  us-il:  US — Illinois
+  vendor: Vendor / industry framework
+
+# Display order + labels for the corpus explorer.
+tiers:
+  - id: tier1
+    name: Global / International standards
+    blurb: ISO/IEC AI standards (open summaries), OECD, UNESCO, G7, Council of Europe.
+  - id: tier2
+    name: EU / UK / National frameworks
+    blurb: EU AI Act & digital rulebook, GDPR, UK, Canada, Singapore, Brazil, China.
+  - id: tier3
+    name: US Federal
+    blurb: NIST AI RMF family, OMB memos, executive orders, NIST CSF/800-53, FedRAMP.
+  - id: tier4
+    name: US State
+    blurb: Colorado, Texas, Utah, California, New York City, Illinois.
+  - id: tier5
+    name: Sector / Cloud
+    blurb: Cloud Security Alliance, Microsoft, Google.
+
+documents:
+
+  # ---------------------------------------------------------------------------
+  # Tier 1 — Global / International standards (8)
+  # ---------------------------------------------------------------------------
+
+  - id: iso-42001-2023
+    title: "ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system"
+    short_name: "ISO/IEC 42001"
+    tier: tier1
+    jurisdiction: int
+    framework_family: "ISO/IEC 42001"
+    authority: "ISO/IEC JTC 1/SC 42"
+    official_url: "https://www.iso.org/standard/81230.html"
+    format: md
+    access: open
+    source_type: authored_summary
+    status: voluntary
+    version_date: "2023-12"
+    path: summaries/iso-42001-2023.md
+    license_note: "Standard text is copyrighted by ISO/IEC. Repo ships only an open, non-normative summary compiled from public information."
+    notes: "Flagship AIMS standard (drives the 'How do I implement ISO 42001?' use case). Harmonized Structure clauses 4–10 + Annex A controls. Purchase full text from ISO/ANSI/BSI."
+
+  - id: iso-23894-2023
+    title: "ISO/IEC 23894:2023 — Artificial intelligence — Guidance on risk management"
+    short_name: "ISO/IEC 23894"
+    tier: tier1
+    jurisdiction: int
+    framework_family: "ISO/IEC 23894"
+    authority: "ISO/IEC JTC 1/SC 42"
+    official_url: "https://www.iso.org/standard/77304.html"
+    format: md
+    access: open
+    source_type: authored_summary
+    status: voluntary
+    version_date: "2023-02"
+    path: summaries/iso-23894-2023.md
+    license_note: "Standard text is copyrighted by ISO/IEC. Repo ships only an open, non-normative summary."
+    notes: "AI risk-management guidance; maps onto ISO 31000. Pairs with NIST AI RMF for comparison answers."
+
+  - id: iso-22989-2022
+    title: "ISO/IEC 22989:2022 — Artificial intelligence — Concepts and terminology"
+    short_name: "ISO/IEC 22989"
+    tier: tier1
+    jurisdiction: int
+    framework_family: "ISO/IEC 22989"
+    authority: "ISO/IEC JTC 1/SC 42"
+    official_url: "https://www.iso.org/standard/74296.html"
+    format: md
+    access: open
+    source_type: authored_summary
+    status: voluntary
+    version_date: "2022-07"
+    path: summaries/iso-22989-2022.md
+    license_note: "Standard text is copyrighted by ISO/IEC. Repo ships only an open, non-normative summary."
+    notes: "Foundational AI terminology; grounds definitional ('what is X') queries."
+
+  - id: iso-38507-2022
+    title: "ISO/IEC 38507:2022 — Governance of IT — Governance implications of the use of AI by organizations"
+    short_name: "ISO/IEC 38507"
+    tier: tier1
+    jurisdiction: int
+    framework_family: "ISO/IEC 38500 (governance)"
+    authority: "ISO/IEC JTC 1/SC 40"
+    official_url: "https://www.iso.org/standard/56641.html"
+    format: md
+    access: open
+    source_type: authored_summary
+    status: voluntary
+    version_date: "2022-04"
+    path: summaries/iso-38507-2022.md
+    license_note: "Standard text is copyrighted by ISO/IEC. Repo ships only an open, non-normative summary."
+    notes: "Board/governing-body view of AI; complements 42001's management-system view."
+
+  - id: oecd-ai-principles
+    title: "OECD Recommendation of the Council on Artificial Intelligence (OECD/LEGAL/0449)"
+    short_name: "OECD AI Principles"
+    tier: tier1
+    jurisdiction: int
+    framework_family: "OECD AI Principles"
+    authority: "OECD"
+    official_url: "https://legalinstruments.oecd.org/en/instruments/OECD-LEGAL-0449"
+    format: html
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2019-05"
+    license_note: "© OECD; reproducible under OECD terms of use (attribution)."
+    notes: "Revised May 2024 (updated definition of an AI system + GenAI). The source of the widely-adopted AI-system definition."
+
+  - id: unesco-ai-ethics-2021
+    title: "UNESCO Recommendation on the Ethics of Artificial Intelligence"
+    short_name: "UNESCO AI Ethics"
+    tier: tier1
+    jurisdiction: int
+    framework_family: "UNESCO AI Ethics"
+    authority: "UNESCO"
+    official_url: "https://web.archive.org/web/20260424052335/https://unesdoc.unesco.org/ark:/48223/pf0000381137"
+    format: html
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2021-11"
+    license_note: "© UNESCO; open access (CC BY-SA for many UNESCO docs — confirm per-doc)."
+    notes: "First global standard-setting instrument on AI ethics; adopted by 193 member states."
+
+  - id: g7-hiroshima-coc-2023
+    title: "Hiroshima Process International Code of Conduct for Organizations Developing Advanced AI Systems"
+    short_name: "G7 Hiroshima CoC"
+    tier: tier1
+    jurisdiction: int
+    framework_family: "G7 Hiroshima Process"
+    authority: "G7"
+    official_url: "https://digital-strategy.ec.europa.eu/en/library/hiroshima-process-international-code-conduct-advanced-ai-systems"
+    format: html
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2023-10"
+    license_note: "Public intergovernmental text."
+    notes: "Voluntary code for advanced/foundation-model developers. EU library mirror is a stable URL."
+
+  - id: coe-framework-convention-ai-2024
+    title: "Council of Europe Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law (CETS No. 225)"
+    short_name: "CoE AI Convention"
+    tier: tier1
+    jurisdiction: int
+    framework_family: "Council of Europe AI Convention"
+    authority: "Council of Europe"
+    official_url: "https://www.coe.int/en/web/artificial-intelligence/the-framework-convention-on-artificial-intelligence"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2024-05"
+    license_note: "Public treaty text (© Council of Europe)."
+    notes: "First binding international AI treaty; opened for signature Sep 2024. Treaty text at rm.coe.int/1680afae3c."
+
+  # ---------------------------------------------------------------------------
+  # Tier 2 — EU / UK / National frameworks (16)
+  # ---------------------------------------------------------------------------
+
+  - id: eu-ai-act-2024-1689
+    title: "Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence (Artificial Intelligence Act)"
+    short_name: "EU AI Act"
+    tier: tier2
+    jurisdiction: eu
+    framework_family: "EU AI Act"
+    authority: "European Parliament & Council"
+    official_url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2024-06-13"
+    license_note: "© European Union; reuse under EUR-Lex terms (attribution)."
+    notes: "Entered into force 2024-08-01; phased application (prohibitions Feb 2025, GPAI Aug 2025, high-risk 2026/2027). The core articles (incl. Art. 9 risk management)."
+
+  - id: eu-ai-act-annexes
+    title: "EU AI Act — Annexes I–XIII"
+    short_name: "EU AI Act Annexes"
+    tier: tier2
+    jurisdiction: eu
+    framework_family: "EU AI Act"
+    authority: "European Parliament & Council"
+    official_url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2024-06-13"
+    license_note: "© European Union; reuse under EUR-Lex terms (attribution)."
+    notes: "Annex III (high-risk use cases) is heavily queried. Extracted from the same OJ text; kept as a separate doc for citation granularity."
+
+  - id: eu-gpai-code-of-practice-2025
+    title: "General-Purpose AI Code of Practice"
+    short_name: "GPAI Code of Practice"
+    tier: tier2
+    jurisdiction: eu
+    framework_family: "EU AI Act"
+    authority: "European Commission (AI Office)"
+    official_url: "https://digital-strategy.ec.europa.eu/en/policies/ai-code-practice"
+    format: html
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2025-07"
+    license_note: "© European Union; EUR-Lex/EC reuse terms."
+    notes: "Voluntary code to demonstrate compliance with GPAI obligations (transparency, copyright, safety/security). Published Jul 2025."
+
+  - id: eu-gpai-guidelines-2025
+    title: "Commission Guidelines on the scope of obligations for general-purpose AI models"
+    short_name: "EU GPAI Guidelines"
+    tier: tier2
+    jurisdiction: eu
+    framework_family: "EU AI Act"
+    authority: "European Commission"
+    official_url: "https://digital-strategy.ec.europa.eu/en/library/commission-guidelines-scope-obligations-general-purpose-ai-models"
+    format: html
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2025-07"
+    license_note: "© European Union; EC reuse terms."
+    notes: "Clarifies who is a GPAI provider and when obligations apply. Verify exact library URL at fetch."
+
+  - id: eu-hleg-ethics-guidelines-2019
+    title: "Ethics Guidelines for Trustworthy AI"
+    short_name: "EU HLEG Guidelines"
+    tier: tier2
+    jurisdiction: eu
+    framework_family: "EU Trustworthy AI"
+    authority: "EU High-Level Expert Group on AI"
+    official_url: "https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai"
+    format: html
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2019-04"
+    license_note: "© European Union; EC reuse terms."
+    notes: "Seven requirements for trustworthy AI; conceptual precursor to the AI Act."
+
+  - id: gdpr-2016-679
+    title: "Regulation (EU) 2016/679 — General Data Protection Regulation (GDPR)"
+    short_name: "GDPR"
+    tier: tier2
+    jurisdiction: eu
+    framework_family: "GDPR"
+    authority: "European Parliament & Council"
+    official_url: "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2016-04-27"
+    license_note: "© European Union; reuse under EUR-Lex terms."
+    notes: "Art. 22 (automated decision-making) + DPIA obligations drive 'GDPR requirements for AI?' answers."
+
+  - id: eu-data-act-2023-2854
+    title: "Regulation (EU) 2023/2854 on harmonised rules on fair access to and use of data (Data Act)"
+    short_name: "EU Data Act"
+    tier: tier2
+    jurisdiction: eu
+    framework_family: "EU Digital Rulebook"
+    authority: "European Parliament & Council"
+    official_url: "https://eur-lex.europa.eu/eli/reg/2023/2854/oj"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2023-12-13"
+    license_note: "© European Union; reuse under EUR-Lex terms."
+    notes: "Applies from Sep 2025. Data-access/sharing context for AI training and IoT data."
+
+  - id: eu-dsa-2022-2065
+    title: "Regulation (EU) 2022/2065 — Digital Services Act (DSA)"
+    short_name: "DSA"
+    tier: tier2
+    jurisdiction: eu
+    framework_family: "EU Digital Rulebook"
+    authority: "European Parliament & Council"
+    official_url: "https://eur-lex.europa.eu/eli/reg/2022/2065/oj"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2022-10-19"
+    license_note: "© European Union; reuse under EUR-Lex terms."
+    notes: "Algorithmic transparency / recommender-system + systemic-risk obligations relevant to AI."
+
+  - id: eu-dma-2022-1925
+    title: "Regulation (EU) 2022/1925 — Digital Markets Act (DMA)"
+    short_name: "DMA"
+    tier: tier2
+    jurisdiction: eu
+    framework_family: "EU Digital Rulebook"
+    authority: "European Parliament & Council"
+    official_url: "https://eur-lex.europa.eu/eli/reg/2022/1925/oj"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2022-09-14"
+    license_note: "© European Union; reuse under EUR-Lex terms."
+    notes: "Gatekeeper obligations; included for completeness of the EU digital rulebook context."
+
+  - id: enisa-ai-cybersecurity
+    title: "ENISA — Multilayer Framework for Good Cybersecurity Practices for AI"
+    short_name: "ENISA AI Security"
+    tier: tier2
+    jurisdiction: eu
+    framework_family: "ENISA AI guidance"
+    authority: "ENISA (EU Agency for Cybersecurity)"
+    official_url: "https://www.enisa.europa.eu/publications/multilayer-framework-for-good-cybersecurity-practices-for-ai"
+    format: md
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2023-06"
+    license_note: "© ENISA; open access with attribution."
+    notes: "AI-specific cybersecurity practices; bridges AI governance and security teams."
+
+  - id: uk-pro-innovation-ai-2023
+    title: "A pro-innovation approach to AI regulation (UK White Paper)"
+    short_name: "UK AI White Paper"
+    tier: tier2
+    jurisdiction: uk
+    framework_family: "UK AI regulation"
+    authority: "UK Department for Science, Innovation and Technology (DSIT)"
+    official_url: "https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach"
+    format: html
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2023-03"
+    license_note: "© Crown copyright; Open Government Licence v3.0."
+    notes: "UK's principles-based, regulator-led approach (contrast with the EU's horizontal law)."
+
+  - id: uk-ico-ai-guidance
+    title: "ICO — Guidance on AI and data protection"
+    short_name: "UK ICO AI Guidance"
+    tier: tier2
+    jurisdiction: uk
+    framework_family: "UK AI regulation"
+    authority: "UK Information Commissioner's Office (ICO)"
+    official_url: "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/"
+    format: html
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2023-03"
+    license_note: "© Crown copyright; Open Government Licence v3.0."
+    notes: "Operational AI + data-protection guidance (fairness, explainability, DPIAs). Periodically updated."
+
+  - id: canada-aida
+    title: "Artificial Intelligence and Data Act (AIDA) — Bill C-27, Part 3"
+    short_name: "Canada AIDA"
+    tier: tier2
+    jurisdiction: ca
+    framework_family: "Canada AIDA"
+    authority: "Government of Canada (ISED)"
+    official_url: "https://ised-isde.canada.ca/site/innovation-better-canada/en/artificial-intelligence-and-data-act"
+    format: html
+    access: open
+    source_type: fetch
+    status: historical
+    version_date: "2022-06"
+    license_note: "© Government of Canada; reproducible under Government of Canada terms."
+    notes: "CURRENCY: Bill C-27 (containing AIDA) DIED on the Order Paper when Parliament was prorogued (Jan 2025) and was not reintroduced as of May 2026. Retained as Canada's flagship AI bill for reference; future uncertain. Status=historical/lapsed."
+
+  - id: singapore-model-ai-governance
+    title: "Model AI Governance Framework (Singapore)"
+    short_name: "SG Model AI Gov"
+    tier: tier2
+    jurisdiction: sg
+    framework_family: "Singapore AI Governance"
+    authority: "Singapore PDPC / IMDA"
+    official_url: "https://www.pdpc.gov.sg/help-and-resources/2020/01/model-ai-governance-framework"
+    format: md
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2020-01"
+    license_note: "© PDPC/IMDA Singapore; open access with attribution."
+    notes: "2nd edition (2020). A Model AI Governance Framework for Generative AI followed (May 2024) — consider adding as a companion. APAC breadth."
+
+  - id: brazil-pl-2338
+    title: "Projeto de Lei nº 2338/2023 — Brazilian AI Bill (Marco Legal da IA)"
+    short_name: "Brazil PL 2338"
+    tier: tier2
+    jurisdiction: br
+    framework_family: "Brazil AI Bill"
+    authority: "Federal Senate of Brazil"
+    official_url: "https://www25.senado.leg.br/web/atividade/materias/-/materia/157233"
+    format: html
+    access: open
+    source_type: fetch
+    status: proposed
+    version_date: "2023-05"
+    license_note: "Public legislative text (Portuguese)."
+    notes: "Risk-based comprehensive AI bill; approved by the Senate Dec 2024, pending in the Chamber of Deputies as of May 2026. Portuguese source; LATAM breadth + a 'proposed' example."
+
+  - id: china-genai-measures-2023
+    title: "Interim Measures for the Management of Generative AI Services"
+    short_name: "China GenAI Measures"
+    tier: tier2
+    jurisdiction: cn
+    framework_family: "China AI rules"
+    authority: "Cyberspace Administration of China (CAC) et al."
+    official_url: "http://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2023-07-10"
+    license_note: "Public regulatory text (Chinese). English rendering via reputable translation."
+    notes: "Effective 2023-08-15. Official source is Chinese; ingest an English translation (e.g. China Law Translate, chinalawtranslate.com/en/generative-ai-interim) and record provenance. Contrasting state-led regime."
+
+  # ---------------------------------------------------------------------------
+  # Tier 3 — US Federal (13)
+  # ---------------------------------------------------------------------------
+
+  - id: nist-ai-rmf-100-1
+    title: "NIST AI Risk Management Framework 1.0 (NIST AI 100-1)"
+    short_name: "NIST AI RMF"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "NIST AI RMF"
+    authority: "NIST"
+    official_url: "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+    format: pdf
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2023-01"
+    license_note: "US Government work — public domain."
+    notes: "Govern/Map/Measure/Manage functions. The US voluntary anchor; maps to ISO 23894 / 42001 in comparison answers."
+
+  - id: nist-ai-600-1-genai-profile
+    title: "NIST AI RMF Generative AI Profile (NIST-AI-600-1)"
+    short_name: "NIST GenAI Profile"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "NIST AI RMF"
+    authority: "NIST"
+    official_url: "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+    format: pdf
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2024-07"
+    license_note: "US Government work — public domain."
+    notes: "Companion profile: GenAI-specific risks + suggested actions."
+
+  - id: nist-ai-rmf-playbook
+    title: "NIST AI RMF Playbook"
+    short_name: "NIST AI RMF Playbook"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "NIST AI RMF"
+    authority: "NIST"
+    official_url: "https://airc.nist.gov/airmf-resources/playbook/"
+    format: html
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2023-01"
+    license_note: "US Government work — public domain."
+    notes: "Actionable, function-by-function suggested actions. Hosted on the NIST AIRC (HTML)."
+
+  - id: omb-m-24-10
+    title: "OMB M-24-10 — Advancing Governance, Innovation, and Risk Management for Agency Use of AI"
+    short_name: "OMB M-24-10"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "OMB AI memos"
+    authority: "US Office of Management and Budget"
+    official_url: "https://www.whitehouse.gov/wp-content/uploads/2024/03/M-24-10-Advancing-Governance-Innovation-and-Risk-Management-for-Agency-Use-of-Artificial-Intelligence.pdf"
+    format: pdf
+    access: open
+    source_type: fetch
+    status: historical
+    version_date: "2024-03-28"
+    license_note: "US Government work — public domain."
+    notes: "Largely superseded by the 2025 OMB memos (M-25-21/22). Retained for lineage. URL may have moved post-2025 admin change — verify; fall back to web.archive.org."
+
+  - id: omb-m-25-21
+    title: "OMB M-25-21 — Accelerating Federal Use of AI through Innovation, Governance, and Public Trust"
+    short_name: "OMB M-25-21"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "OMB AI memos"
+    authority: "US Office of Management and Budget"
+    official_url: "https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-21-Accelerating-Federal-Use-of-AI-through-Innovation-Governance-and-Public-Trust.pdf"
+    format: pdf
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2025-04-03"
+    license_note: "US Government work — public domain."
+    notes: "2025 replacement for M-24-10 (agency AI use). Verify exact URL/filename at fetch."
+
+  - id: omb-m-25-22
+    title: "OMB M-25-22 — Driving Efficient Acquisition of Artificial Intelligence in Government"
+    short_name: "OMB M-25-22"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "OMB AI memos"
+    authority: "US Office of Management and Budget"
+    official_url: "https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-22-Driving-Efficient-Acquisition-of-Artificial-Intelligence-in-Government.pdf"
+    format: pdf
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2025-04-03"
+    license_note: "US Government work — public domain."
+    notes: "Companion 2025 memo on federal AI acquisition. Verify exact URL/filename at fetch."
+
+  - id: ostp-ai-bill-of-rights
+    title: "Blueprint for an AI Bill of Rights"
+    short_name: "AI Bill of Rights"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "OSTP"
+    authority: "US White House Office of Science and Technology Policy (OSTP)"
+    official_url: "https://web.archive.org/web/20250120053000/https://www.whitehouse.gov/wp-content/uploads/2022/10/Blueprint-for-an-AI-Bill-of-Rights.pdf"
+    format: pdf
+    access: open
+    source_type: fetch
+    status: historical
+    version_date: "2022-10"
+    license_note: "US Government work — public domain."
+    notes: "Non-binding. CURRENCY: likely de-published under the 2025 administration — fetch from the Wayback Machine (web.archive.org) if the live URL 404s. Five principles still widely cited."
+
+  - id: america-ai-action-plan-2025
+    title: "America's AI Action Plan"
+    short_name: "AI Action Plan"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "US Executive AI policy"
+    authority: "US White House"
+    official_url: "https://www.whitehouse.gov/wp-content/uploads/2025/07/Americas-AI-Action-Plan.pdf"
+    format: pdf
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2025-07"
+    license_note: "US Government work — public domain."
+    notes: "Jul 2025 strategy + 3 accompanying EOs. Verify exact URL at fetch."
+
+  - id: eo-14179-removing-barriers-2025
+    title: "Executive Order 14179 — Removing Barriers to American Leadership in Artificial Intelligence"
+    short_name: "EO 14179"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "US Executive AI policy"
+    authority: "US White House"
+    official_url: "https://www.federalregister.gov/documents/2025/01/31/2025-02172/removing-barriers-to-american-leadership-in-artificial-intelligence"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2025-01-23"
+    license_note: "US Government work — public domain."
+    notes: "Jan 2025 EO that rescinded EO 14110 (2023). Federal Register is the stable canonical source."
+
+  - id: eo-national-policy-framework-ai-2025
+    title: "Executive Order — Ensuring a National Policy Framework for Artificial Intelligence"
+    short_name: "EO National AI Framework"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "US Executive AI policy"
+    authority: "US White House"
+    official_url: "https://www.federalregister.gov/presidential-documents/executive-orders"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2025-12"
+    license_note: "US Government work — public domain."
+    notes: "Dec 2025 EO seeking to preempt state AI laws. VERIFY exact Federal Register citation/URL at fetch (placeholder is the EO index)."
+
+  - id: nist-csf-2-0
+    title: "NIST Cybersecurity Framework (CSF) 2.0 (NIST CSWP 29)"
+    short_name: "NIST CSF 2.0"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "NIST cybersecurity"
+    authority: "NIST"
+    official_url: "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf"
+    format: pdf
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2024-02"
+    license_note: "US Government work — public domain."
+    notes: "Govern function added in 2.0; security baseline that AI governance plugs into."
+
+  - id: nist-sp-800-53r5
+    title: "NIST SP 800-53 Rev. 5 — Security and Privacy Controls for Information Systems and Organizations"
+    short_name: "NIST SP 800-53r5"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "NIST cybersecurity"
+    authority: "NIST"
+    official_url: "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf"
+    format: pdf
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2020-09"
+    license_note: "US Government work — public domain."
+    notes: "Control catalog underpinning FedRAMP; security-team anchor. Large PDF — chunking must respect control families."
+
+  - id: fedramp-baseline
+    title: "FedRAMP Security Controls Baseline (Rev. 5)"
+    short_name: "FedRAMP Baseline"
+    tier: tier3
+    jurisdiction: us
+    framework_family: "NIST cybersecurity"
+    authority: "FedRAMP / US GSA"
+    official_url: "https://www.fedramp.gov/documents-templates/"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2023-05"
+    license_note: "US Government work — public domain."
+    notes: "Low/Moderate/High baselines (subset of 800-53r5). Verify the current baseline document URL at fetch."
+
+  # ---------------------------------------------------------------------------
+  # Tier 4 — US State (8)
+  # ---------------------------------------------------------------------------
+
+  - id: colorado-ai-act-sb24-205
+    title: "Colorado Artificial Intelligence Act (SB 24-205)"
+    short_name: "Colorado AI Act"
+    tier: tier4
+    jurisdiction: us-co
+    framework_family: "Colorado AI Act"
+    authority: "Colorado General Assembly"
+    official_url: "https://leg.colorado.gov/bills/sb24-205"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2024-05"
+    license_note: "US state legislative text — public domain."
+    notes: "First comprehensive US state AI law (high-risk + algorithmic discrimination). Effective date amended; verify current effective date (delayed into 2026). Frequent EU-AI-Act comparison target."
+
+  - id: texas-traiga-hb149
+    title: "Texas Responsible Artificial Intelligence Governance Act (TRAIGA) — HB 149"
+    short_name: "Texas TRAIGA"
+    tier: tier4
+    jurisdiction: us-tx
+    framework_family: "Texas TRAIGA"
+    authority: "Texas Legislature"
+    official_url: "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB149"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2025-06"
+    license_note: "US state legislative text — public domain."
+    notes: "Effective 2026-01-01. Prohibited-uses + government-use focus."
+
+  - id: utah-ai-policy-act
+    title: "Utah Artificial Intelligence Policy Act (SB 149, am. SB 226 / SB 332)"
+    short_name: "Utah AI Policy Act"
+    tier: tier4
+    jurisdiction: us-ut
+    framework_family: "Utah AI Policy Act"
+    authority: "Utah State Legislature"
+    official_url: "https://le.utah.gov/~2024/bills/static/SB0149.html"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2024-03"
+    license_note: "US state legislative text — public domain."
+    notes: "Effective 2024-05; amended 2025 (SB 226/332). GenAI consumer-disclosure obligations + an AI Policy Office."
+
+  - id: california-sb-53
+    title: "California SB 53 — Transparency in Frontier Artificial Intelligence Act (TFAIA)"
+    short_name: "California SB 53"
+    tier: tier4
+    jurisdiction: us-ca
+    framework_family: "California AI laws"
+    authority: "California State Legislature"
+    official_url: "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB53"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2025-09"
+    license_note: "US state legislative text — public domain."
+    notes: "Frontier-model transparency/safety reporting. Effective 2026-01-01. Successor to the vetoed SB 1047."
+
+  - id: california-cppa-admt
+    title: "CCPA Regulations on Automated Decisionmaking Technology (ADMT), Risk Assessments and Cybersecurity Audits"
+    short_name: "CA CPPA ADMT"
+    tier: tier4
+    jurisdiction: us-ca
+    framework_family: "California AI laws"
+    authority: "California Privacy Protection Agency (CPPA)"
+    official_url: "https://cppa.ca.gov/regulations/"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2025"
+    license_note: "US state regulatory text — public domain."
+    notes: "ADMT access/opt-out + risk assessments. Finalized 2025; phased compliance from 2026-01-01. Verify the final adopted regulation URL at fetch."
+
+  - id: california-ab-2013
+    title: "California AB 2013 — Generative AI: Training Data Transparency"
+    short_name: "California AB 2013"
+    tier: tier4
+    jurisdiction: us-ca
+    framework_family: "California AI laws"
+    authority: "California State Legislature"
+    official_url: "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB2013"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2024-09"
+    license_note: "US state legislative text — public domain."
+    notes: "Requires GenAI developers to post training-data documentation. Effective 2026-01-01."
+
+  - id: nyc-ll144-aedt
+    title: "NYC Local Law 144 of 2021 — Automated Employment Decision Tools (AEDT)"
+    short_name: "NYC LL144"
+    tier: tier4
+    jurisdiction: us-ny
+    framework_family: "NYC LL144"
+    authority: "NYC Department of Consumer and Worker Protection (DCWP)"
+    official_url: "https://www.nyc.gov/site/dca/about/automated-employment-decision-tools.page"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2021-12"
+    license_note: "US municipal law — public domain."
+    notes: "Bias-audit + candidate-notice requirements for hiring tools; enforced from 2023-07-05."
+
+  - id: illinois-bipa-ai-video
+    title: "Illinois — Biometric Information Privacy Act (BIPA) & Artificial Intelligence Video Interview Act"
+    short_name: "Illinois BIPA/AIVIA"
+    tier: tier4
+    jurisdiction: us-il
+    framework_family: "Illinois AI/biometric laws"
+    authority: "Illinois General Assembly"
+    official_url: "https://web.archive.org/web/20250630192313/https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=3004"
+    format: html
+    access: open
+    source_type: fetch
+    status: in_force
+    version_date: "2008-10"
+    license_note: "US state legislative text — public domain."
+    notes: "BIPA (740 ILCS 14, 2008) + AI Video Interview Act (820 ILCS 42, 2020). Note: IL HB 3773 (AI in employment, eff. 2026) is a candidate add-on."
+
+  # ---------------------------------------------------------------------------
+  # Tier 5 — Sector / Cloud (3)
+  # ---------------------------------------------------------------------------
+
+  - id: csa-ai-guidance
+    title: "Cloud Security Alliance — AI Safety Initiative guidance (AI Controls Matrix)"
+    short_name: "CSA AI Guidance"
+    tier: tier5
+    jurisdiction: vendor
+    framework_family: "Cloud Security Alliance"
+    authority: "Cloud Security Alliance (CSA)"
+    official_url: "https://cloudsecurityalliance.org/research/topics/artificial-intelligence"
+    format: html
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2024"
+    license_note: "© Cloud Security Alliance; free with registration / open publications."
+    notes: "Cloud + AI security controls; speaks to the security-team audience. Pick a specific stable publication (e.g., AI Controls Matrix) at fetch."
+
+  - id: microsoft-responsible-ai-v2
+    title: "Microsoft Responsible AI Standard, v2 (General Requirements)"
+    short_name: "MS Responsible AI v2"
+    tier: tier5
+    jurisdiction: vendor
+    framework_family: "Microsoft Responsible AI"
+    authority: "Microsoft"
+    official_url: "https://www.microsoft.com/en-us/ai/responsible-ai"
+    format: md
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2022-06"
+    license_note: "© Microsoft; publicly released framework."
+    notes: "Goal-based responsible-AI requirements; a concrete vendor implementation of AI governance. Direct PDF link may move — verify."
+
+  - id: google-saif
+    title: "Google Secure AI Framework (SAIF)"
+    short_name: "Google SAIF"
+    tier: tier5
+    jurisdiction: vendor
+    framework_family: "Google SAIF"
+    authority: "Google"
+    official_url: "https://saif.google/"
+    format: html
+    access: open
+    source_type: fetch
+    status: voluntary
+    version_date: "2023-06"
+    license_note: "© Google; publicly released framework."
+    notes: "Six core elements for securing AI systems; security-team oriented."

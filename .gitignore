@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / web
+node_modules/
+dist/
+.vite/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Corpus: the open-access sources ARE committed (part of the solution, so a fresh
+# clone has the full corpus). Only the optional local "manual" drop — a user's own
+# licensed PDFs — stays out of git.
+sources/manual/
+
+# Runtime audit log (data/mock_chunks.yaml IS tracked — offline corpus seed)
+data/*.jsonl
+
+# Python venv
+.venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

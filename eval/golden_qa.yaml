@@ -1,0 +1,201 @@
+# Golden Q&A for the eval harness (PLAN.md §5). Each item:
+#   id          short identifier
+#   query       the question
+#   mode        list | summarize | generate  (default summarize)
+#   site        optional jurisdiction scope
+#   expect_docs doc_id substrings that SHOULD appear in the cited sources
+#   expect_terms key facts/terms that SHOULD appear in a summarize answer
+#   intent      optional expected router intent (asserted when set)
+#
+# Tuned to the currently-ingested corpus (real-parsed NIST/state/EU + seed for
+# EUR-Lex). Update as coverage grows.
+questions:
+  - id: eu-records
+    query: "What records must I keep under the EU AI Act for a high-risk system?"
+    expect_docs: [eu-ai-act]
+    expect_terms: [logging, "risk management", traceability]
+    intent: implementation
+
+  - id: eu-highrisk
+    query: "What are high-risk AI systems under the EU AI Act?"
+    expect_docs: [eu-ai-act]
+    expect_terms: ["annex iii", "high-risk"]
+
+  - id: iso-42001-implement
+    query: "How do I implement ISO 42001?"
+    expect_docs: [iso-42001]
+    expect_terms: ["management system", clause, "annex a"]
+    intent: implementation
+
+  - id: gdpr-automated
+    query: "What does GDPR say about automated decision-making for AI?"
+    expect_docs: [gdpr]
+    expect_terms: ["article 22", "human"]
+
+  - id: nist-rmf-functions
+    query: "What are the core functions of the NIST AI Risk Management Framework?"
+    expect_docs: [nist-ai-rmf]
+    expect_terms: [govern, map, measure, manage]
+
+  - id: nist-genai-risks
+    query: "What risks does the NIST Generative AI Profile address?"
+    expect_docs: [nist-ai-600-1, nist-ai-rmf]
+    expect_terms: [generative]
+
+  - id: nist-800-53
+    query: "What does NIST SP 800-53 cover for access control?"
+    expect_docs: [nist-sp-800-53]
+    expect_terms: [control]
+
+  - id: colorado-highrisk
+    query: "How does the Colorado AI Act handle high-risk systems?"
+    expect_docs: [colorado]
+    expect_terms: ["algorithmic discrimination", "impact assessment"]
+
+  - id: compare-us-eu
+    query: "Compare US and EU AI policy."
+    expect_docs: [eu-ai-act, america-ai-action-plan]
+    expect_terms: ["risk-based", voluntary, innovation, binding]
+    intent: comparison
+
+  - id: us-action-plan
+    query: "What is America's AI Action Plan approach to AI policy?"
+    expect_docs: [america-ai-action-plan]
+    expect_terms: [innovation]
+
+  - id: gpai-obligations
+    query: "What obligations does the GPAI Code of Practice cover?"
+    expect_docs: [gpai]
+    expect_terms: [transparency]
+
+  - id: oecd-principles
+    query: "What are the OECD AI Principles?"
+    expect_docs: [oecd]
+    expect_terms: [transparency]
+
+  - id: lookup-eu-act
+    query: "What is the EU AI Act?"
+    mode: list
+    expect_docs: [eu-ai-act]
+
+  - id: scoping-texas
+    query: "Which AI rules apply to a company operating in Texas?"
+    mode: list
+    expect_docs: [texas]
+
+  # --- Tier 1: Global / international standards ---
+  - id: iso-23894-risk
+    query: "How does ISO/IEC 23894 guide AI risk management?"
+    expect_docs: [iso-23894]
+    expect_terms: ["risk management", guidance]
+
+  - id: iso-22989-terms
+    query: "What AI terminology and concepts does ISO/IEC 22989 define?"
+    expect_docs: [iso-22989]
+    expect_terms: [concepts, terminology]
+
+  - id: iso-38507-governance
+    query: "What does ISO/IEC 38507 say about governance of AI for an organization?"
+    expect_docs: [iso-38507]
+    expect_terms: [governance, board]
+
+  - id: g7-hiroshima
+    query: "What is the G7 Hiroshima Code of Conduct for advanced AI?"
+    expect_docs: [g7-hiroshima]
+    expect_terms: ["code of conduct", advanced]
+
+  # --- Tier 2: National frameworks beyond the EU ---
+  - id: canada-aida
+    query: "What does Canada's AIDA require for high-impact AI systems?"
+    expect_docs: [canada-aida]
+    expect_terms: ["high-impact", harm]
+
+  # --- Tier 3: US federal (beyond the NIST AI RMF) ---
+  - id: nist-csf
+    query: "What does the NIST Cybersecurity Framework 2.0 cover?"
+    expect_docs: [nist-csf]
+    expect_terms: [cybersecurity, govern]
+
+  - id: ostp-aibor
+    query: "What protections does the Blueprint for an AI Bill of Rights set out?"
+    expect_docs: [ostp-ai-bill-of-rights]
+    expect_terms: [blueprint, rights]
+
+  # --- Tier 4: US state (beyond Colorado / Texas) ---
+  - id: california-sb53
+    query: "What does California SB 53 require of frontier AI developers?"
+    expect_docs: [california-sb-53]
+    expect_terms: [frontier, transparency]
+
+  - id: nyc-ll144
+    query: "What does NYC Local Law 144 require for automated employment decision tools?"
+    expect_docs: [nyc-ll144]
+    expect_terms: ["automated employment", "bias audit"]
+
+  # --- generate mode (templated artifact) ---
+  - id: generate-iso42001-checklist
+    query: "Draft an ISO 42001 implementation checklist."
+    mode: generate
+    expect_docs: [iso-42001]
+    expect_terms: ["annex a", control, policy, "management system"]
+
+  # --- recovered corpus docs (Tier 1/2/3/5 breadth) ---
+  - id: unesco-ethics
+    query: "What does the UNESCO Recommendation on the Ethics of AI establish?"
+    expect_docs: [unesco]
+    expect_terms: [human, transparency]
+
+  - id: coe-convention
+    query: "What does the Council of Europe Framework Convention on AI require?"
+    expect_docs: [coe]
+    expect_terms: ["human rights", "rule of law"]
+
+  - id: singapore-model
+    query: "What is Singapore's Model AI Governance Framework?"
+    expect_docs: [singapore]
+    expect_terms: [governance, "human-centric"]
+
+  - id: china-genai
+    query: "What does China require of generative AI service providers?"
+    expect_docs: [china]
+    expect_terms: [generative, security]
+
+  - id: brazil-highrisk
+    query: "How does Brazil's AI bill PL 2338 classify high-risk AI systems?"
+    expect_docs: [brazil]
+    expect_terms: ["high-risk", rights]
+
+  - id: uk-ico
+    query: "What does the UK ICO guidance say about AI and data protection?"
+    expect_docs: [uk-ico]
+    expect_terms: ["data protection", dpia]
+
+  - id: fedramp
+    query: "What is FedRAMP and how does it relate to NIST SP 800-53?"
+    expect_docs: [fedramp]
+    expect_terms: [cloud, "800-53"]
+
+  - id: enisa-ai
+    query: "What cybersecurity practices does ENISA recommend for AI?"
+    expect_docs: [enisa]
+    expect_terms: [cybersecurity, practices]
+
+  - id: microsoft-rai
+    query: "What are Microsoft's responsible AI principles?"
+    expect_docs: [microsoft-responsible-ai]
+    expect_terms: [fairness, accountability]
+
+  - id: csa-ai-security
+    query: "What does the Cloud Security Alliance recommend for securing AI?"
+    expect_docs: [csa-ai-guidance]
+    expect_terms: ["best practices", generative, governance]
+
+  - id: eu-gpai-guidelines
+    query: "What do the EU Commission guidelines say about general-purpose AI model obligations and systemic risk?"
+    expect_docs: [eu-gpai-guidelines]
+    expect_terms: [systemic, documentation, flops]
+
+  - id: out-of-scope
+    query: "What's the best pizza place in New York?"
+    expect_docs: []
+    intent: out_of_scope

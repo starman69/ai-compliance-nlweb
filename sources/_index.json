@@ -1,0 +1,434 @@
+[
+  {
+    "id": "iso-42001-2023",
+    "source_type": "authored_summary",
+    "url": "https://www.iso.org/standard/81230.html",
+    "status": "copied",
+    "path": "sources/open/iso-42001-2023.md",
+    "sha256": "075d662e431032f2ff92e3328c201e658ce9ada0b8c56edfaab9d379cff66bcd",
+    "fetched_at": "2026-05-23T22:30:45.068283+00:00"
+  },
+  {
+    "id": "iso-23894-2023",
+    "source_type": "authored_summary",
+    "url": "https://www.iso.org/standard/77304.html",
+    "status": "copied",
+    "path": "sources/open/iso-23894-2023.md",
+    "sha256": "d56e3a3720b0c4117eaa33a082ac23660040f9a49ccc9981476ea9e14158bfc1",
+    "fetched_at": "2026-05-23T22:30:45.070135+00:00"
+  },
+  {
+    "id": "iso-22989-2022",
+    "source_type": "authored_summary",
+    "url": "https://www.iso.org/standard/74296.html",
+    "status": "copied",
+    "path": "sources/open/iso-22989-2022.md",
+    "sha256": "fe9606b994c8d26b13b90a250c62b3d90e331684e867c2739c94d61d4f4c69fe",
+    "fetched_at": "2026-05-23T22:30:45.070605+00:00"
+  },
+  {
+    "id": "iso-38507-2022",
+    "source_type": "authored_summary",
+    "url": "https://www.iso.org/standard/56641.html",
+    "status": "copied",
+    "path": "sources/open/iso-38507-2022.md",
+    "sha256": "8e8758145274f6d0eb93d11aeb19b58d55ea38ce6368bc533030c8572026760f",
+    "fetched_at": "2026-05-23T22:30:45.070896+00:00"
+  },
+  {
+    "id": "oecd-ai-principles",
+    "source_type": "fetch",
+    "url": "https://legalinstruments.oecd.org/en/instruments/OECD-LEGAL-0449",
+    "status": "cached",
+    "path": "sources/open/oecd-ai-principles.md",
+    "sha256": "076b6404f3a9bdac035735e6266a29693722882a417d226ba8f3dcbb504488c6",
+    "fetched_at": "2026-05-23T22:30:45.071222+00:00"
+  },
+  {
+    "id": "unesco-ai-ethics-2021",
+    "source_type": "fetch",
+    "url": "https://web.archive.org/web/20260424052335/https://unesdoc.unesco.org/ark:/48223/pf0000381137",
+    "status": "fetched",
+    "path": "sources/open/unesco-ai-ethics-2021.md",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fetched_at": "2026-05-23T22:30:45.071461+00:00"
+  },
+  {
+    "id": "g7-hiroshima-coc-2023",
+    "source_type": "fetch",
+    "url": "https://digital-strategy.ec.europa.eu/en/library/hiroshima-process-international-code-conduct-advanced-ai-systems",
+    "status": "cached",
+    "path": "sources/open/g7-hiroshima-coc-2023.md",
+    "sha256": "cd4a5c89071c461766cb77ad9f8fd7a981efb6b8ce51b1a2391cf9912175f64a",
+    "fetched_at": "2026-05-23T22:30:46.024856+00:00"
+  },
+  {
+    "id": "coe-framework-convention-ai-2024",
+    "source_type": "fetch",
+    "url": "https://www.coe.int/en/web/artificial-intelligence/the-framework-convention-on-artificial-intelligence",
+    "status": "error: HTTPStatusError: Client error '403 Forbidden' for url 'https://www.coe.int/en/web/artificial-intelligence/the-framework-convention-on-artificial-intelligence'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+    "path": null,
+    "sha256": null,
+    "fetched_at": "2026-05-23T22:30:46.026190+00:00"
+  },
+  {
+    "id": "eu-ai-act-2024-1689",
+    "source_type": "fetch",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689",
+    "status": "cached",
+    "path": "sources/open/eu-ai-act-2024-1689.pdf",
+    "sha256": "bba630444b3278e881066774002a1d7824308934f49ccfa203e65be43692f55e",
+    "fetched_at": "2026-05-23T22:30:46.752251+00:00"
+  },
+  {
+    "id": "eu-ai-act-annexes",
+    "source_type": "fetch",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689",
+    "status": "cached",
+    "path": "sources/open/eu-ai-act-annexes.pdf",
+    "sha256": "bba630444b3278e881066774002a1d7824308934f49ccfa203e65be43692f55e",
+    "fetched_at": "2026-05-23T22:30:46.757575+00:00"
+  },
+  {
+    "id": "eu-gpai-code-of-practice-2025",
+    "source_type": "fetch",
+    "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-code-practice",
+    "status": "cached",
+    "path": "sources/open/eu-gpai-code-of-practice-2025.md",
+    "sha256": "2c20cc1d669e3b7596b82873f14fcd1eda9ecfd45a9e0ff82962ee4de0fd8d42",
+    "fetched_at": "2026-05-23T22:30:46.761290+00:00"
+  },
+  {
+    "id": "eu-gpai-guidelines-2025",
+    "source_type": "fetch",
+    "url": "https://digital-strategy.ec.europa.eu/en/library/commission-guidelines-scope-obligations-general-purpose-ai-models",
+    "status": "cached",
+    "path": "sources/open/eu-gpai-guidelines-2025.md",
+    "sha256": "816e6f5595efacbbb0c1407f8ad90feadf0a6a0a50efa9fe3722456c2c67e95a",
+    "fetched_at": "2026-05-23T22:30:46.761717+00:00"
+  },
+  {
+    "id": "eu-hleg-ethics-guidelines-2019",
+    "source_type": "fetch",
+    "url": "https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai",
+    "status": "cached",
+    "path": "sources/open/eu-hleg-ethics-guidelines-2019.md",
+    "sha256": "44a5b66eae54635f59f7ed62fd43ee9cbfa56224d5a0121b1e163628bf6b3879",
+    "fetched_at": "2026-05-23T22:30:46.761978+00:00"
+  },
+  {
+    "id": "gdpr-2016-679",
+    "source_type": "fetch",
+    "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+    "status": "cached",
+    "path": "sources/open/gdpr-2016-679.pdf",
+    "sha256": "bd84e63f5b622b739a83389afc3b30d240f792bb88d8eb03a816c9a82b0c2499",
+    "fetched_at": "2026-05-23T22:30:46.762225+00:00"
+  },
+  {
+    "id": "eu-data-act-2023-2854",
+    "source_type": "fetch",
+    "url": "https://eur-lex.europa.eu/eli/reg/2023/2854/oj",
+    "status": "cached",
+    "path": "sources/open/eu-data-act-2023-2854.pdf",
+    "sha256": "0d100d513136adfaa5655d77784d3af00f477b8588471cbb51dea7aff8687838",
+    "fetched_at": "2026-05-23T22:30:46.763925+00:00"
+  },
+  {
+    "id": "eu-dsa-2022-2065",
+    "source_type": "fetch",
+    "url": "https://eur-lex.europa.eu/eli/reg/2022/2065/oj",
+    "status": "cached",
+    "path": "sources/open/eu-dsa-2022-2065.pdf",
+    "sha256": "04b688f2ea13fc0f0e0f615b6835608405ee848b17892d26a1b69dcf1bae71a0",
+    "fetched_at": "2026-05-23T22:30:46.765686+00:00"
+  },
+  {
+    "id": "eu-dma-2022-1925",
+    "source_type": "fetch",
+    "url": "https://eur-lex.europa.eu/eli/reg/2022/1925/oj",
+    "status": "cached",
+    "path": "sources/open/eu-dma-2022-1925.pdf",
+    "sha256": "dc88bdaa5e146e2dedb360c4c820bb23f024fc495d5379abcd0c40360a7303ec",
+    "fetched_at": "2026-05-23T22:30:46.767702+00:00"
+  },
+  {
+    "id": "enisa-ai-cybersecurity",
+    "source_type": "fetch",
+    "url": "https://www.enisa.europa.eu/publications/multilayer-framework-for-good-cybersecurity-practices-for-ai",
+    "status": "cached",
+    "path": "sources/open/enisa-ai-cybersecurity.pdf",
+    "sha256": "5b89bcdfb6e72996a61b37a18868e058729a63124635158ad3509130dabb54ec",
+    "fetched_at": "2026-05-23T22:30:46.769064+00:00"
+  },
+  {
+    "id": "uk-pro-innovation-ai-2023",
+    "source_type": "fetch",
+    "url": "https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach",
+    "status": "cached",
+    "path": "sources/open/uk-pro-innovation-ai-2023.md",
+    "sha256": "0f8f0bdccc5abf349360efdb0a86aa764d5088cfb5a17c802abafcd60ed4a4a2",
+    "fetched_at": "2026-05-23T22:30:46.769541+00:00"
+  },
+  {
+    "id": "uk-ico-ai-guidance",
+    "source_type": "fetch",
+    "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/",
+    "status": "cached",
+    "path": "sources/open/uk-ico-ai-guidance.md",
+    "sha256": "3f72cf761c010f21f1661142bbb52d0a305d0a60b92bf914c23ccc8a56e23177",
+    "fetched_at": "2026-05-23T22:30:46.769796+00:00"
+  },
+  {
+    "id": "canada-aida",
+    "source_type": "fetch",
+    "url": "https://ised-isde.canada.ca/site/innovation-better-canada/en/artificial-intelligence-and-data-act",
+    "status": "cached",
+    "path": "sources/open/canada-aida.md",
+    "sha256": "db3ecbd9179355ab063641b93e941e10546b80321d3ab39456d15e4a6d13225f",
+    "fetched_at": "2026-05-23T22:30:46.769998+00:00"
+  },
+  {
+    "id": "singapore-model-ai-governance",
+    "source_type": "fetch",
+    "url": "https://www.pdpc.gov.sg/help-and-resources/2020/01/model-ai-governance-framework",
+    "status": "cached",
+    "path": "sources/open/singapore-model-ai-governance.pdf",
+    "sha256": "de37904b90dea0403be33f1496b6eaa75311c97ec4a247700868117ed6e1514e",
+    "fetched_at": "2026-05-23T22:30:46.770290+00:00"
+  },
+  {
+    "id": "brazil-pl-2338",
+    "source_type": "fetch",
+    "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/157233",
+    "status": "cached",
+    "path": "sources/open/brazil-pl-2338.md",
+    "sha256": "38a1a24b1fb1a5cf52fbcb84778d491520f655f923f234e3d4ea7cad15406163",
+    "fetched_at": "2026-05-23T22:30:46.770561+00:00"
+  },
+  {
+    "id": "china-genai-measures-2023",
+    "source_type": "fetch",
+    "url": "http://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm",
+    "status": "cached",
+    "path": "sources/open/china-genai-measures-2023.md",
+    "sha256": "a1e42639d893e5207b58377fd57c23a5db33cffebad5580ddfd9370da667efa1",
+    "fetched_at": "2026-05-23T22:30:46.771094+00:00"
+  },
+  {
+    "id": "nist-ai-rmf-100-1",
+    "source_type": "fetch",
+    "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+    "status": "cached",
+    "path": "sources/open/nist-ai-rmf-100-1.pdf",
+    "sha256": "7576edb531d9848825814ee88e28b1795d3a84b435b4b797d3670eafdc4a89f1",
+    "fetched_at": "2026-05-23T22:30:46.771357+00:00"
+  },
+  {
+    "id": "nist-ai-600-1-genai-profile",
+    "source_type": "fetch",
+    "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+    "status": "cached",
+    "path": "sources/open/nist-ai-600-1-genai-profile.pdf",
+    "sha256": "6e73620ab6b64e90ef2c04bf0e0d6246185a2f4b1b13cab0df494496cff89b6a",
+    "fetched_at": "2026-05-23T22:30:46.773599+00:00"
+  },
+  {
+    "id": "nist-ai-rmf-playbook",
+    "source_type": "fetch",
+    "url": "https://airc.nist.gov/airmf-resources/playbook/",
+    "status": "cached",
+    "path": "sources/open/nist-ai-rmf-playbook.md",
+    "sha256": "4559f6603ddd31603f84692eb4c7a1620ea3e227233648aef6cf5f1cc4b4062b",
+    "fetched_at": "2026-05-23T22:30:46.775040+00:00"
+  },
+  {
+    "id": "omb-m-24-10",
+    "source_type": "fetch",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2024/03/M-24-10-Advancing-Governance-Innovation-and-Risk-Management-for-Agency-Use-of-Artificial-Intelligence.pdf",
+    "status": "cached",
+    "path": "sources/open/omb-m-24-10.pdf",
+    "sha256": "89e548f806c3e2c6702ab9996f92344b5c05ec0f26e0d4874ddb402449c044fb",
+    "fetched_at": "2026-05-23T22:30:46.775412+00:00"
+  },
+  {
+    "id": "omb-m-25-21",
+    "source_type": "fetch",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-21-Accelerating-Federal-Use-of-AI-through-Innovation-Governance-and-Public-Trust.pdf",
+    "status": "cached",
+    "path": "sources/open/omb-m-25-21.pdf",
+    "sha256": "0aab0aa4eaeac969ed93894d3940c5dc9d0b7377048171b164a439e8b9e49813",
+    "fetched_at": "2026-05-23T22:30:46.776321+00:00"
+  },
+  {
+    "id": "omb-m-25-22",
+    "source_type": "fetch",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-22-Driving-Efficient-Acquisition-of-Artificial-Intelligence-in-Government.pdf",
+    "status": "fetched",
+    "path": "sources/open/omb-m-25-22.pdf",
+    "sha256": "e157538371eb9665fabdacff748788fc6afc0575bb3661d15b146f3138084cd8",
+    "fetched_at": "2026-05-23T22:30:46.779151+00:00"
+  },
+  {
+    "id": "ostp-ai-bill-of-rights",
+    "source_type": "fetch",
+    "url": "https://web.archive.org/web/20250120053000/https://www.whitehouse.gov/wp-content/uploads/2022/10/Blueprint-for-an-AI-Bill-of-Rights.pdf",
+    "status": "fetched",
+    "path": "sources/open/ostp-ai-bill-of-rights.pdf",
+    "sha256": "ab34b52e55b3f6641d5db725333129a66c0bbbb33a060f62ad44d52d98935c0a",
+    "fetched_at": "2026-05-23T22:30:47.258048+00:00"
+  },
+  {
+    "id": "america-ai-action-plan-2025",
+    "source_type": "fetch",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2025/07/Americas-AI-Action-Plan.pdf",
+    "status": "cached",
+    "path": "sources/open/america-ai-action-plan-2025.pdf",
+    "sha256": "91d56ab3ddefe43f395bde31e1c3923fb37f47091275aaf2a0d7da500ff547f4",
+    "fetched_at": "2026-05-23T22:30:48.640351+00:00"
+  },
+  {
+    "id": "eo-14179-removing-barriers-2025",
+    "source_type": "fetch",
+    "url": "https://www.federalregister.gov/documents/2025/01/31/2025-02172/removing-barriers-to-american-leadership-in-artificial-intelligence",
+    "status": "cached",
+    "path": "sources/open/eo-14179-removing-barriers-2025.md",
+    "sha256": "46e2b010fc3f886793ba6b77562345073f87181545e2998b69e95dc10455ab13",
+    "fetched_at": "2026-05-23T22:30:48.642313+00:00"
+  },
+  {
+    "id": "eo-national-policy-framework-ai-2025",
+    "source_type": "fetch",
+    "url": "https://www.federalregister.gov/presidential-documents/executive-orders",
+    "status": "cached",
+    "path": "sources/open/eo-national-policy-framework-ai-2025.md",
+    "sha256": "46e2b010fc3f886793ba6b77562345073f87181545e2998b69e95dc10455ab13",
+    "fetched_at": "2026-05-23T22:30:48.642701+00:00"
+  },
+  {
+    "id": "nist-csf-2-0",
+    "source_type": "fetch",
+    "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
+    "status": "cached",
+    "path": "sources/open/nist-csf-2-0.pdf",
+    "sha256": "3c31f46fee98cac0c4323453e5109291a213b4de7fef8c058af9bf67f717433c",
+    "fetched_at": "2026-05-23T22:30:48.642952+00:00"
+  },
+  {
+    "id": "nist-sp-800-53r5",
+    "source_type": "fetch",
+    "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf",
+    "status": "cached",
+    "path": "sources/open/nist-sp-800-53r5.pdf",
+    "sha256": "fc63bcd61715d0181dd8e85998b1e6201ae3515fc6626102101cab1841e11ec6",
+    "fetched_at": "2026-05-23T22:30:48.644982+00:00"
+  },
+  {
+    "id": "fedramp-baseline",
+    "source_type": "fetch",
+    "url": "https://www.fedramp.gov/documents-templates/",
+    "status": "cached",
+    "path": "sources/open/fedramp-baseline.md",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fetched_at": "2026-05-23T22:30:48.650912+00:00"
+  },
+  {
+    "id": "colorado-ai-act-sb24-205",
+    "source_type": "fetch",
+    "url": "https://leg.colorado.gov/bills/sb24-205",
+    "status": "cached",
+    "path": "sources/open/colorado-ai-act-sb24-205.md",
+    "sha256": "580c3a559ee36c65607777b75d54331528a0fcc3fa944ba1701d00dd45937c14",
+    "fetched_at": "2026-05-23T22:30:48.651027+00:00"
+  },
+  {
+    "id": "texas-traiga-hb149",
+    "source_type": "fetch",
+    "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB149",
+    "status": "error: HTTPStatusError: Server error '503 Service Temporarily Unavailable' for url 'https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB149'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+    "path": null,
+    "sha256": null,
+    "fetched_at": "2026-05-23T22:30:48.651337+00:00"
+  },
+  {
+    "id": "utah-ai-policy-act",
+    "source_type": "fetch",
+    "url": "https://le.utah.gov/~2024/bills/static/SB0149.html",
+    "status": "cached",
+    "path": "sources/open/utah-ai-policy-act.md",
+    "sha256": "e5f9914d12818519afde61c99acc2dccd8c5442f847c52f544d6c127df1d2a1d",
+    "fetched_at": "2026-05-23T22:30:51.432291+00:00"
+  },
+  {
+    "id": "california-sb-53",
+    "source_type": "fetch",
+    "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB53",
+    "status": "cached",
+    "path": "sources/open/california-sb-53.md",
+    "sha256": "8a3c5461c86ebf69ba983b3e7fb0263c103f656ffc41d2c9a873967179a690b9",
+    "fetched_at": "2026-05-23T22:30:51.433680+00:00"
+  },
+  {
+    "id": "california-cppa-admt",
+    "source_type": "fetch",
+    "url": "https://cppa.ca.gov/regulations/",
+    "status": "cached",
+    "path": "sources/open/california-cppa-admt.md",
+    "sha256": "f80c6e628716b9878794d0e447bc92babfd35bb75f6e317858a180f7eae3cf2c",
+    "fetched_at": "2026-05-23T22:30:51.434158+00:00"
+  },
+  {
+    "id": "california-ab-2013",
+    "source_type": "fetch",
+    "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB2013",
+    "status": "cached",
+    "path": "sources/open/california-ab-2013.md",
+    "sha256": "df28f4452d2bd95ca9e53ceffb9d3c7df66db9ff2cd2c0d1e4490ad5140aaabf",
+    "fetched_at": "2026-05-23T22:30:51.434419+00:00"
+  },
+  {
+    "id": "nyc-ll144-aedt",
+    "source_type": "fetch",
+    "url": "https://www.nyc.gov/site/dca/about/automated-employment-decision-tools.page",
+    "status": "cached",
+    "path": "sources/open/nyc-ll144-aedt.md",
+    "sha256": "0f23f8d7abc4e0f8cc29c16eafab24940ad81bafcdc49e5e5e0a3bd68c6758b2",
+    "fetched_at": "2026-05-23T22:30:51.434674+00:00"
+  },
+  {
+    "id": "illinois-bipa-ai-video",
+    "source_type": "fetch",
+    "url": "https://web.archive.org/web/20250630192313/https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=3004",
+    "status": "fetched",
+    "path": "sources/open/illinois-bipa-ai-video.md",
+    "sha256": "e8b21f1eda009dbee067d51d428b837fef2c85d783fbc6073fac0440f6bd3e2e",
+    "fetched_at": "2026-05-23T22:30:51.434999+00:00"
+  },
+  {
+    "id": "csa-ai-guidance",
+    "source_type": "fetch",
+    "url": "https://cloudsecurityalliance.org/research/topics/artificial-intelligence",
+    "status": "cached",
+    "path": "sources/open/csa-ai-guidance.md",
+    "sha256": "117acbe8c156686ed9ec5ba8d0a36a84f97c2935e60b04bbcccb1eb7f656338f",
+    "fetched_at": "2026-05-23T22:30:52.570202+00:00"
+  },
+  {
+    "id": "microsoft-responsible-ai-v2",
+    "source_type": "fetch",
+    "url": "https://www.microsoft.com/en-us/ai/responsible-ai",
+    "status": "cached",
+    "path": "sources/open/microsoft-responsible-ai-v2.pdf",
+    "sha256": "150b3126ae8f4090bc7eec125046cb64d025cc24cf8caa2e62c5368194f8dd97",
+    "fetched_at": "2026-05-23T22:30:52.571406+00:00"
+  },
+  {
+    "id": "google-saif",
+    "source_type": "fetch",
+    "url": "https://saif.google/",
+    "status": "cached",
+    "path": "sources/open/google-saif.md",
+    "sha256": "634a848ea20c60d0ef78aca44edd93bfd9afeb48cb673e1473e10bcf681cf70b",
+    "fetched_at": "2026-05-23T22:30:52.572201+00:00"
+  }
+]

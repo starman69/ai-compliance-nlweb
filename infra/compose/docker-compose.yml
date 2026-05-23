@@ -1,0 +1,73 @@
+# AI Compliance NLWeb — local stack. Run: `cd infra/compose && docker compose up -d`.
+# Docker groups everything under the `compliance` project (PLAN.md §8).
+name: compliance
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.12.5
+    ports: ["6333:6333"]
+    volumes: ["qdrant_data:/qdrant/storage"]
+
+  ollama:
+    image: ollama/ollama:latest
+    ports: ["11434:11434"]
+    volumes: ["ollama_data:/root/.ollama"]
+    # GPU acceleration (NVIDIA Container Toolkit). Comment out for CPU-only.
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  reranker:
+    image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.7
+    command: ["--model-id", "BAAI/bge-reranker-base"]
+    environment:
+      - HF_ENDPOINT=https://huggingface.co
+    ports: ["8081:80"]
+
+  unstructured:
+    image: quay.io/unstructured-io/unstructured-api:latest
+    ports: ["8002:8000"]   # host 8002 to avoid clashing with api on 8000
+
+  bootstrap:
+    build:
+      context: ../..
+      dockerfile: infra/compose/Dockerfile.bootstrap
+    env_file: [.env]
+    depends_on: [qdrant, ollama]
+    restart: "no"
+
+  api:
+    build:
+      context: ../..
+      dockerfile: infra/compose/Dockerfile.api
+    env_file: [.env]
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+      - OLLAMA_BASE_URL=http://ollama:11434/v1
+    ports: ["8000:8000"]
+    volumes:
+      - "../../src:/app/src"
+      - "../../manifest:/app/manifest"
+      - "../../data:/app/data"
+      - "../../sources:/app/sources"
+    depends_on: [qdrant]
+
+  web:
+    image: node:20-alpine
+    working_dir: /app/src/web
+    command: sh -c "npm install && npm run dev -- --host --port 8088"
+    environment:
+      - API_URL=http://api:8000
+    ports: ["8088:8088"]
+    volumes:
+      - "../..:/app"
+      - "/app/src/web/node_modules"   # anonymous volume: container installs its own (musl) deps
+    depends_on: [api]
+
+volumes:
+  qdrant_data:
+  ollama_data:

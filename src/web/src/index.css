@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+/* OKLCH cool-paper + ink-navy palette; purple accent. Light + dark tokens. */
+:root {
+  --paper: oklch(0.985 0.004 95);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.975 0.005 95);
+  --ink: oklch(0.29 0.03 264);
+  --muted: oklch(0.53 0.02 264);
+  --line: oklch(0.9 0.008 264);
+  --accent: oklch(0.52 0.19 295);
+  --accent-fg: oklch(0.99 0 0);
+  --ok: oklch(0.6 0.13 150);
+  --warn: oklch(0.7 0.14 75);
+  --danger: oklch(0.58 0.21 25);
+}
+.dark {
+  --paper: oklch(0.21 0.02 264);
+  --surface: oklch(0.255 0.022 264);
+  --surface-2: oklch(0.23 0.02 264);
+  --ink: oklch(0.95 0.01 95);
+  --muted: oklch(0.72 0.02 264);
+  --line: oklch(0.36 0.02 264);
+  --accent: oklch(0.7 0.16 295);
+  --accent-fg: oklch(0.16 0.02 264);
+  --ok: oklch(0.72 0.14 150);
+  --warn: oklch(0.78 0.14 75);
+  --danger: oklch(0.7 0.18 25);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: "Fraunces", Georgia, serif;
+}
+.font-mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.surface-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.hairline {
+  border: 1px solid var(--line);
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.075rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Markdown answer typography (react-markdown + remark-gfm) */
+.prose-answer {
+  line-height: 1.62;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.prose-answer > :first-child {
+  margin-top: 0;
+}
+.prose-answer > :last-child {
+  margin-bottom: 0;
+}
+.prose-answer p {
+  margin: 0.5rem 0;
+}
+.prose-answer h1,
+.prose-answer h2,
+.prose-answer h3,
+.prose-answer h4 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0.9rem 0 0.4rem;
+}
+.prose-answer h1 { font-size: 1.3rem; }
+.prose-answer h2 { font-size: 1.15rem; }
+.prose-answer h3 { font-size: 1.02rem; }
+.prose-answer h4 { font-size: 0.95rem; }
+.prose-answer ul,
+.prose-answer ol {
+  margin: 0.5rem 0;
+  padding-left: 1.35rem;
+}
+.prose-answer ul { list-style: disc; }
+.prose-answer ol { list-style: decimal; }
+.prose-answer li { margin: 0.25rem 0; }
+.prose-answer li > ul,
+.prose-answer li > ol { margin: 0.2rem 0; }
+.prose-answer strong { font-weight: 600; }
+.prose-answer em { font-style: italic; }
+.prose-answer a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-answer blockquote {
+  margin: 0.6rem 0;
+  padding: 0.2rem 0 0.2rem 0.8rem;
+  border-left: 3px solid var(--line);
+  color: var(--muted);
+}
+.prose-answer hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 0.9rem 0;
+}
+.prose-answer code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85em;
+  background: var(--surface-2);
+  padding: 0.05rem 0.3rem;
+  border-radius: 6px;
+}
+.prose-answer pre {
+  margin: 0.6rem 0;
+  padding: 0.7rem 0.9rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow-x: auto;
+}
+.prose-answer pre code {
+  background: none;
+  padding: 0;
+}
+/* GFM tables — scroll horizontally on narrow/mobile screens */
+.prose-answer table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 0.6rem 0;
+  font-size: 0.85rem;
+}
+.prose-answer th,
+.prose-answer td {
+  border: 1px solid var(--line);
+  padding: 0.35rem 0.55rem;
+  text-align: left;
+  vertical-align: top;
+}
+.prose-answer thead th {
+  background: var(--surface-2);
+  font-weight: 600;
+}
+
+/* thin scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}

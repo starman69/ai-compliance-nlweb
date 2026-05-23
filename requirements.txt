@@ -1,0 +1,18 @@
+# Runtime dependencies (API + Mock profile, runs offline with no model server).
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.7
+pyyaml>=6.0
+httpx>=0.27
+pypdf>=4.0          # PDF text extraction for ingestion
+fastembed>=0.3      # BM25 sparse vectors for hybrid retrieval
+
+# --- Optional, lazy-imported per profile / pipeline (not needed for the Mock
+#     profile, unit tests, or offline UI dev). Install as needed: ---
+# openai>=1.40                 # local (Ollama /v1) + azure (Azure OpenAI) chat/embeddings
+# qdrant-client>=1.12          # local vector store
+# fastembed>=0.3               # local sparse (BM25/SPLADE) vectors
+# azure-identity>=1.17         # azure profile auth (DefaultAzureCredential)
+# azure-search-documents>=11.5 # azure vector store
+# mcp>=1.2                     # full MCP SDK (streamable HTTP) — /mcp has a built-in JSON-RPC fallback
+# unstructured-client>=0.25    # ingestion: PDF -> structured text
